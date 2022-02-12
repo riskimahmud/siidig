@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+.title {
+  font-family: "Anton", sans-serif;
+}
+
+.sub-title {
+  font-family: "Roboto", sans-serif;
+}
+
+@keyframes ngambang {
+  0% {
+    transform: translateY(0);
+  }
+  /* 25% { transform: translateY(-10px); }   */
+  35% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes ulangi {
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+.ngambang {
+  margin: 0 auto;
+  display: block;
+  animation-name: ngambang;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  padding-bottom: 10px;
+  text-align: center;
+  width: 150px;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.blob.red {
+  background: rgba(255, 82, 82, 1);
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+}
