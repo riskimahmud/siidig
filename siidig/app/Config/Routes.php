@@ -116,7 +116,7 @@ $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
 
     // investasi
     $routes->add('investasi', 'LaporanInvestasi::index');
-    $routes->post('investasi', 'LaporanInvestasi::index');
+    // $routes->get('investasi', 'LaporanInvestasi::index');
     $routes->get('investasi/tambah', 'LaporanInvestasi::tambah');
     $routes->post('investasi/tambah', 'LaporanInvestasi::store');
     $routes->get('investasi/ubah/(:num)', 'LaporanInvestasi::ubah/$1');
@@ -126,6 +126,9 @@ $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     $routes->post('investasi/import', 'LaporanInvestasi::do_import');
 
     $routes->add('investasi/(:num)', 'LaporanInvestasi::detail/$1');
+
+    // download template investasi
+    $routes->post('download-template-investasi', 'LaporanInvestasi::download_template');
 });
 
 /*

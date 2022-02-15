@@ -64,7 +64,7 @@ return [
 
 	// Files
 	'uploaded'              => 'File belum dipilih',
-	'max_size'              => 'File yang anda unggah terlalu besar, maksimal {param{1}} kb',
+	'max_size'              => 'File yang anda unggah terlalu besar',
 	'is_image'              => 'Format file yang anda unggah tidak didukung',
 	'mime_in'               => 'Format file tidak didukung',
 	'ext_in'                => 'Extensi file tidak diizinkan',

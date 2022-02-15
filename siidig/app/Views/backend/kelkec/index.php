@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <h1 class="card-title"><?= $title ?></h1>

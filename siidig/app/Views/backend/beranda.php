@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <div class="bg-gradient-purple px-3 py-2 mb-2 rounded-lg shadow-lg text-lg">
         Selamat Datang di <span class="text-bold">
-          SIIDIG Sistem Informasi Industri Daerah Gorontalo
+          SIIDIG (Sistem Informasi Industri Daerah Gorontalo)
         </span>
       </div>
     </div>
@@ -16,7 +16,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Tenaga Kerja</span>
-          <span class="info-box-number text-lg"><?= $statistik_all->tenaga_kerja ?></span>
+          <span class="info-box-number text-lg"><?= ($statistik_all) ? $statistik_all->tenaga_kerja : 0; ?></span>
         </div>
       </div>
     </div>
@@ -26,15 +26,23 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Unit Usaha</span>
-          <span class="info-box-number text-lg"><?= $statistik_all->unit_usaha ?></span>
+          <span class="info-box-number text-lg"><?= ($statistik_all) ? $statistik_all->unit_usaha : 0 ?></span>
         </div>
       </div>
     </div>
-    <?php if ($statistik_all->tahun != date("Y")) : ?>
-      <div class="col-12">
+    <?php if ($statistik_all && $statistik_all->tahun != date("Y")) : ?>
+      <div class="col-12 col-md-6 mb-2">
         <div class="border border-danger px-3 py-2 rounded">
           <span class="text-danger font-weight-bold">
             <i class="fas fa-info-circle fa-fw"></i> ANDA BELUM MENGINPUT DATA INVESTASI TAHUN INI
+          </span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-2">
+        <div class="border border-primary px-3 py-2 rounded">
+          <span class="text-primary font-weight-bold">
+            <i class="fas fa-info-circle fa-fw"></i>
+            YANG DITAMPILKAN DI STATISTIK ADALAH DATA TAHUN <?= $statistik_all->tahun; ?>
           </span>
         </div>
       </div>
@@ -43,7 +51,7 @@
       <!-- small card -->
       <div class="small-box bg-gradient-info shadow-sm">
         <div class="inner">
-          <h3 class="mb-1"><?= angkaInvestasi($statistik_all->nilai_investasi); ?></h3>
+          <h3 class="mb-1"><?= ($statistik_all) ? angkaInvestasi($statistik_all->nilai_investasi) : 0; ?></h3>
           <p>Nilai Investasi</p>
         </div>
         <div class="icon">
@@ -55,7 +63,7 @@
       <!-- small card -->
       <div class="small-box bg-gradient-primary shadow-sm">
         <div class="inner">
-          <h3 class="mb-1"><?= angkaInvestasi($statistik_all->jumlah_produksi); ?></h3>
+          <h3 class="mb-1"><?= ($statistik_all) ? angkaInvestasi($statistik_all->jumlah_produksi) : 0; ?></h3>
           <p>Jumlah Produksi</p>
         </div>
         <div class="icon">
@@ -67,7 +75,7 @@
       <!-- small card -->
       <div class="small-box bg-gradient-success shadow-sm">
         <div class="inner">
-          <h3 class="mb-1"><?= angkaInvestasi($statistik_all->nilai_produksi); ?></h3>
+          <h3 class="mb-1"><?= ($statistik_all) ? angkaInvestasi($statistik_all->nilai_produksi) : 0; ?></h3>
           <p>Nilai Produksi</p>
         </div>
         <div class="icon">
@@ -79,7 +87,7 @@
       <!-- small card -->
       <div class="small-box bg-gradient-red shadow-sm">
         <div class="inner">
-          <h3 class="mb-1"><?= angkaInvestasi($statistik_all->nilai_bbbp); ?></h3>
+          <h3 class="mb-1"><?= ($statistik_all) ? angkaInvestasi($statistik_all->nilai_bbbp) : 0; ?></h3>
           <p>Nilai BB/BP</p>
         </div>
         <div class="icon">

@@ -27,7 +27,7 @@ class LaporanInvestasi extends BaseController
     {
         $data['title'] = "Daftar Investasi";
 
-        $tahun = $this->request->getPost('tahun') ? $this->request->getPost('tahun') : date("Y");
+        $tahun = $this->request->getVar('tahun') ? $this->request->getVar('tahun') : date("Y");
         // dd($this->investasi);
         $user = [];
         if (user("level") == "user") {
@@ -182,7 +182,14 @@ class LaporanInvestasi extends BaseController
 
     public function do_import()
     {
-        $this->session->remove('data_import');
+        if (!$this->validate([
+            'tahun' => ['label' => 'Tahun', 'rules' => 'required'],
+            'industri' => ['label' => 'Tahun', 'rules' => 'required'],
+            'excel' => 'uploaded[excel]|max_size[excel,1024]|mime_in[excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet]|ext_in[excel,xlsx]'
+        ])) {
+            return redirect()->to('/investasi/import')->withInput();
+        }
+
         $file = $this->request->getFile('excel');
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(TRUE);
@@ -193,22 +200,53 @@ class LaporanInvestasi extends BaseController
 
         // echo $worksheet->getCellByColumnAndRow(2, 2)->getValue();
         $data_import = [];
-        for ($row = 2; $row <= $highestRow; ++$row) {
+        for ($row = 3; $row <= $highestRow; ++$row) {
             $baris = [
-                'nama' => $worksheet->getCellByColumnAndRow(1, $row)->getValue(),
-                'umur' => $worksheet->getCellByColumnAndRow(2, $row)->getValue(),
-                'hobi' => $worksheet->getCellByColumnAndRow(3, $row)->getValue()
+                'nama_ikm' => $worksheet->getCellByColumnAndRow(2, $row)->getValue(),
+                'nama' => $worksheet->getCellByColumnAndRow(3, $row)->getValue(),
+                'alamat' => $worksheet->getCellByColumnAndRow(4, $row)->getValue(),
+                'keldes' => $worksheet->getCellByColumnAndRow(5, $row)->getValue(),
+                'kecamatan' => $worksheet->getCellByColumnAndRow(6, $row)->getValue(),
+                'telp' => $worksheet->getCellByColumnAndRow(8, $row)->getValue(),
+                'bentuk_badan_usaha' => $worksheet->getCellByColumnAndRow(9, $row)->getValue(),
+                'tahun_izin' => $worksheet->getCellByColumnAndRow(10, $row)->getValue(),
+                'kode_kbli' => $worksheet->getCellByColumnAndRow(11, $row)->getValue(),
+                'kbli' => $worksheet->getCellByColumnAndRow(12, $row)->getValue(),
+                'komoditi' => $worksheet->getCellByColumnAndRow(13, $row)->getValue(),
+                'produk' => $worksheet->getCellByColumnAndRow(14, $row)->getValue(),
+                'tkl' => $worksheet->getCellByColumnAndRow(15, $row)->getValue(),
+                'tkp' => $worksheet->getCellByColumnAndRow(16, $row)->getValue(),
+                'nilai_investasi' => $worksheet->getCellByColumnAndRow(17, $row)->getValue(),
+                'jumlah_produksi' => $worksheet->getCellByColumnAndRow(18, $row)->getValue(),
+                'satuan' => $worksheet->getCellByColumnAndRow(19, $row)->getValue(),
+                'nilai_produksi' => $worksheet->getCellByColumnAndRow(20, $row)->getValue(),
+                'nilai_bbbp' => $worksheet->getCellByColumnAndRow(21, $row)->getValue(),
+                'kabkota_id' => user("kabkota_id"),
+                'user_id' => user("user_id"),
+                'tahun' => $this->request->getPost('tahun'),
+                'industri_id' => $this->request->getPost('industri'),
             ];
-            if ($row == "2") {
-                $baris['error'] = 'Data tidak valid';
-            }
             array_push($data_import, $baris);
         }
 
-        $data['title'] = "Verifikasi Data Import";
-        $data['base'] = $this->base;
-        $data['data'] = $data_import;
-        $this->session->set('data_import', $data_import);
-        return view('backend/' . $this->folder . '/verifikasi_import', $data);
+        $import = $this->investasi->insertBatch($data_import);
+        if ($import) {
+            $notifikasi = array(
+                "status" => "success", "msg" => "Investasi berhasil diimport",
+            );
+        } else {
+            $notifikasi = array(
+                "status" => "danger", "msg" => $this->title . " gagal diimport",
+            );
+        }
+        session()->setFlashdata('notifikasi', $notifikasi);
+        return redirect()->to('/investasi');
+        // dd($data_import);
+    }
+
+    // download template excel
+    public function download_template()
+    {
+        return $this->response->download('uploads/template-investasi.xlsx', null)->setFileName('FORMAT.xlsx');
     }
 }

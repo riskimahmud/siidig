@@ -30,6 +30,7 @@ class BaseController extends Controller
      * @var IncomingRequest
      */
     protected $request;
+    protected $response;
     protected $qrcode;
     protected $crud_model;
     /**

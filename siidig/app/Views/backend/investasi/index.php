@@ -8,12 +8,15 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title"><?= $title; ?></h3>
-
+                    <div class="card-tools">
+                        <a href="<?= base_url($base . "/import"); ?>" class="btn btn-success btn-sm"> <i class="fas fa-file-excel fa-fw"></i> Import Data</a>
+                        <a href="<?= base_url($base . "/tambah"); ?>" class="btn btn-primary btn-sm"> <i class="fas fa-plus-circle fa-fw"></i> Tambah Data</a>
+                    </div>
                 </div>
                 <div class="card-header">
                     <div class="card-title">
 
-                        <?= form_open('/investasi', ['autocomplete' => 'off']); ?>
+                        <?= form_open('/investasi', ['autocomplete' => 'off', 'method' => 'get']); ?>
                         <div class="input-group input-group-sm">
                             <label for="tahun" class="font-weight-normal mr-2 text-md">Masukkan Tahun </label>
                             <input type="text" class="form-control" style="width: 70px;" name="tahun" list="tahun" placeholder="Masukkan Tahun" value="<?= $tahun ?>">
@@ -30,11 +33,6 @@
                             </span>
                         </div>
                         <?= form_close(); ?>
-                    </div>
-
-                    <div class="card-tools">
-                        <a href="<?= base_url($base . "/import"); ?>" class="btn btn-success btn-sm"> <i class="fas fa-file-excel fa-fw"></i> Import Data</a>
-                        <a href="<?= base_url($base . "/tambah"); ?>" class="btn btn-primary btn-sm"> <i class="fas fa-plus-circle fa-fw"></i> Tambah Data</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">

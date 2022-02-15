@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <h1 class="card-title"><?= $title; ?></h1>
                     <div class="card-tools">
-                        <a href="<?= base_url($base); ?>" class="btn btn-default btn-xs">
+                        <a href="#" onclick="history.go(-1)" class="btn btn-default btn-xs">
                             <i class="fas fa-arrow-left"></i> Kembali
                         </a>
                         <a href="<?= base_url($base . '/ubah/' . $data['id']); ?>" class="btn btn-warning btn-xs">
