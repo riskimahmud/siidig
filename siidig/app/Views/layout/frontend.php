@@ -98,9 +98,9 @@
                                 <p>We are enabling digital transformation for our clients since 1999 by providing tailored solutions</p>
                             </div>
                             <div class="clearfix"></div>
-                            <!-- <div data-swiper-parallax="500" class="slide-btns">
-                                <a href="#" class="btn-main bg-btn lnk">View Showcase <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
-                            </div> -->
+                            <div data-swiper-parallax="500" class="slide-btns">
+                                <a href="/login" class="btn-main bg-btn lnk">Login <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,9 +116,9 @@
                                 <p>We are enabling digital transformation for our clients since 1999 by providing tailored solutions</p>
                             </div>
                             <div class="clearfix"></div>
-                            <!-- <div data-swiper-parallax="500" class="slide-btns">
-                                <a href="#" class="btn-main bg-btn lnk">View Showcase <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
-                            </div> -->
+                            <div data-swiper-parallax="500" class="slide-btns">
+                                <a href="/login" class="btn-main bg-btn lnk">Login <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,8 +269,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="common-heading text-l">
-                        <span>Why Choose Us</span>
-                        <h2 class="mb20">Why The Niwax <span class="text-second text-bold">Ranked Top</span> Among The Leading Web & App Development Companies</h2>
+                        <span>Tentang Kami</span>
+                        <h2 class="mb20">DINAS KOPERASI UMKM PERINDUSTRIAN DAN PERDAGANGAN PROVINSI GORONTALO</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                         <div class="itm-media-object mt40 tilt-3d">
                             <div class="media">
