@@ -1,10 +1,10 @@
-    <?= $this->include('layout/head_html'); ?>
+    <?= $this->include('layout/backend/head_html'); ?>
     <!-- Site wrapper -->
 
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
 
-            <?= $this->include('layout/header'); ?>
+            <?= $this->include('layout/backend/header'); ?>
 
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -19,7 +19,7 @@
                 </a>
 
                 <!-- Sidebar -->
-                <?= $this->include('layout/sidebar'); ?>
+                <?= $this->include('layout/backend/sidebar'); ?>
                 <!-- /.sidebar -->
             </aside>
 
@@ -27,7 +27,7 @@
             <div class="content-wrapper pb-2">
 
                 <!-- Content Header (Page header) -->
-                <?= $this->include("layout/breadcrumb.php") ?>
+                <?= $this->include("layout/backend/breadcrumb.php") ?>
                 <!-- /.content-header -->
                 <!-- Main content -->
                 <section class="content">
@@ -59,16 +59,16 @@
             </div>
 
 
-            <?= $this->include('layout/footer'); ?>
+            <?= $this->include('layout/backend/footer'); ?>
             <!-- /.control-sidebar -->
 
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
             </aside>
         </div>
-        <?= $this->include('layout/footer_js'); ?>
+        <?= $this->include('layout/backend/footer_js'); ?>
         <?= $this->renderSection('script'); ?>
-        <?= $this->include('layout/foot_html'); ?>
+        <?= $this->include('layout/backend/foot_html'); ?>
     </body>
 
     </html>
