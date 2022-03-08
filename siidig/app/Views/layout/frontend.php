@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#2e2a8f">
-    <!--website-favicon-->
-    <link href="images/favicon.png" rel="icon">
     <!--plugin-css-->
     <link href="/assets_front/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets_front/css/plugin.min.css" rel="stylesheet">
