@@ -696,18 +696,10 @@
     <script src="/assets_front/js/swiper.min.js"></script>
     <script src="/assets_front/js/preloader.js"></script>
     <script src="/assets_front/js/tweenmax.min.js"></script>
-    <script src="/assets_front/js/gdprcookies.js"></script>
+    <!-- <script src="/assets_front/js/gdprcookies.js"></script> -->
     <script src="/assets_front/js/dark-mode.js"></script>
     <!--common script file-->
     <script src="/assets_front/js/main.js"></script>
-    <script>
-        gdprCookieNotice({
-            statement: 'https://themeforest.net/user/rajesh-doot/portfolio',
-            performance: ['JSESSIONID'],
-            analytics: ['xxxx', 'ga'],
-            marketing: ['SSID']
-        });
-    </script>
 </body>
 
 </html>
