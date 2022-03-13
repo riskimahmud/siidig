@@ -83,6 +83,13 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->get('aplikasi/ubah/(:num)', 'Aplikasi::ubah/$1');
     $routes->post('aplikasi/ubah', 'Aplikasi::update');
     $routes->delete('aplikasi/(:num)', 'Aplikasi::hapus/$1');
+
+    $routes->get('header', 'Header::index');
+    $routes->get('header/tambah', 'Header::tambah');
+    $routes->post('header/tambah', 'Header::store');
+    $routes->get('header/ubah/(:num)', 'Header::ubah/$1');
+    $routes->post('header/ubah', 'Header::update');
+    $routes->delete('header/(:num)', 'Header::hapus/$1');
 });
 $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     // kelurahan kecamatan

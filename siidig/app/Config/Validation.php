@@ -153,4 +153,18 @@ class Validation
         'link' => ['label' => 'Link Aplikasi', 'rules' => 'required|valid_url'],
         'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
     ];
+
+    public $header = [
+        'title' => ['label' => 'Title', 'rules' => 'permit_empty'],
+        'subtitle' => ['label' => 'Link', 'rules' => 'permit_empty'],
+        'link' => ['label' => 'Link', 'rules' => 'permit_empty|valid_url'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'uploaded[gambar]|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $header_update = [
+        'title' => ['label' => 'Title', 'rules' => 'permit_empty'],
+        'subtitle' => ['label' => 'Link', 'rules' => 'permit_empty'],
+        'link' => ['label' => 'Link', 'rules' => 'permit_empty|valid_url'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
+    ];
 }

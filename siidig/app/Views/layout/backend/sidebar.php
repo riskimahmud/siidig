@@ -78,6 +78,14 @@
           </li>
           <li class="nav-header pt-1">Informasi</li>
           <li class="nav-item">
+            <a href="<?= base_url("header"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-image fa-fw"></i>
+              <p>
+                Header
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url("blog"); ?>" class="nav-link">
               <i class="nav-icon fas fa-newspaper fa-fw"></i>
               <p>
