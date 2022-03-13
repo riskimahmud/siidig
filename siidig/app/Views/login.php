@@ -30,8 +30,9 @@
     <div class="login-box">
         <img src="<?= base_url("assets/img/logo-provinsi.png"); ?>" class="ngambang text-center">
         <div class="login-logo">
-            <img src="<?= base_url("assets/img/logo.png"); ?>" alt="logo" class="img-fluid">
-            <!-- <a href="<?= base_url(); ?>"><b>SPT</b></a> -->
+            <a href="<?= base_url(); ?>">
+                <img src="<?= base_url("assets/img/logo.png"); ?>" alt="logo" class="img-fluid">
+            </a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

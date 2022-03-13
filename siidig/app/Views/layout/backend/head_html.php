@@ -39,6 +39,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url("assets/css/adminlte.min.css") ?>">
 
+    <?= $this->renderSection('css'); ?>
+
     <script>
         const url = '<?= base_url(); ?>';
     </script>

@@ -85,6 +85,6 @@ class Login extends BaseController
 
         $this->session->setFlashdata("notifikasi", $notifikasi);
         $this->session->destroy();
-        return redirect("/");
+        return redirect()->to('/login');
     }
 }

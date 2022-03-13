@@ -76,6 +76,31 @@
               </p>
             </a>
           </li>
+          <li class="nav-header pt-1">Informasi</li>
+          <li class="nav-item">
+            <a href="<?= base_url("blog"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-newspaper fa-fw"></i>
+              <p>
+                Berita
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url("pelatihan"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-user-graduate fa-fw"></i>
+              <p>
+                Pelatihan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url("aplikasi"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-globe fa-fw"></i>
+              <p>
+                Aplikasi
+              </p>
+            </a>
+          </li>
         <?php } else if (user("level") == "operator") { // operator
         ?>
           <!-- <li class="nav-item">
@@ -92,10 +117,18 @@
         <?php if (user("level") == "admin") : ?>
           <li class="nav-header pt-1">UTAMA</li>
           <li class="nav-item">
-            <a href="<?= base_url("laporan"); ?>" class="nav-link">
-              <i class="nav-icon fas fa-print fa-fw"></i>
+            <a href="<?= base_url("siinas"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-building fa-fw"></i>
               <p>
-                Laporan
+                Perusahaan SIINAS
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url("laporan"); ?>" class="nav-link">
+              <i class="nav-icon fas fa-briefcase fa-fw"></i>
+              <p>
+                Laporan Inverstasi
               </p>
             </a>
           </li>

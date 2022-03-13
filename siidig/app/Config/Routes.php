@@ -37,65 +37,14 @@ $routes->get('/logout', 'Login::logout');
 
 $routes->get('/beranda', 'Backend::index');
 $routes->get('/testing', 'Backend::coba');
-$routes->get('/cek_tmt', 'Backend::cek_tmt');
-$routes->get('/cek_spt/(:any)', 'Backend::cek_spt/$1');
-$routes->get('/cek-spt', 'Admin::cek_spt_admin');
 // $routes->get('/testing', 'Backend::testing');
 // $routes->get('/laporan', 'Laporan::index');
 // $routes->add('/cari_laporan', 'Laporan::cari');
 // $routes->add('/cetak_laporan', 'Laporan::cetak');
 $routes->add('/profil', 'Backend::profil');
-$routes->add('/detail-jabatan/(:num)', 'Jabatan::detail/$1');
-$routes->add('/ajukan-jabatan/(:num)', 'Jabatan::ajukan/$1');
-
-$routes->add('/tmt', 'Admin::masuk_tmt');
-$routes->add('/sinkron', 'Admin::sinkron_simpeg');
 
 $routes->add('/laporan', 'Admin::laporan');
 $routes->add('/cari_laporan', 'Admin::cari_laporan');
-
-$routes->add('ajax/cari-pegawai-by-skpd', 'Ajax::cari_pegawai_by_skpd');
-$routes->add('ajax/cari-jabatan-by-skpd', 'Ajax::cari_jabatan_by_skpd');
-$routes->add('ajax/cari-spt-by-id', 'Ajax::cari_spt');
-
-$routes->add('/spt-pelantikan', 'Admin::daftar_pelantikan');
-$routes->add('/spt-pelantikan/buat', 'Admin::buat_pelantikan');
-$routes->add('/spt-pelantikan/(:any)/sinkron', 'Admin::sinkron_simpeg_pelantikan/$1');
-$routes->add('/spt-pelantikan/(:any)/cetak', 'Admin::cetak_pelantikan/$1/$2');
-$routes->add('/spt-pelantikan/(:any)/selesai', 'Admin::selesai_pelantikan/$1');
-$routes->add('/spt-pelantikan/(:any)/ubah', 'Admin::ubah_pelantikan/$1');
-$routes->add('/spt-pelantikan/(:any)/hapus', 'Admin::hapus_pelantikan/$1');
-$routes->add('/spt-pelantikan/(:any)/tambah-pegawai', 'Admin::tambah_pegawai/$1');
-$routes->add('/spt-pelantikan/(:any)/ubah-pegawai/(:any)', 'Admin::ubah_pegawai/$1/$2');
-$routes->add('/spt-pelantikan/(:any)/hapus-pegawai/(:any)', 'Admin::hapus_pegawai/$1/$2');
-$routes->add('/spt-pelantikan/(:any)/cetak-petikan/(:any)', 'Admin::cetak_petikan/$1/$2');
-$routes->add('/spt-pelantikan/(:any)', 'Admin::detail_pelantikan/$1');
-
-
-$routes->add('/spt', 'Admin::daftar_spt');
-$routes->add('/spt/hapus_filter', 'Admin::hapus_filter/spt');
-$routes->add('/spt/filter', 'Admin::filter/spt');
-$routes->add('/spt/buat', 'Admin::buat_pengajuan');
-$routes->add('/spt/buat-khusus', 'Admin::buat_pengajuan_khusus');
-$routes->add('/ajax/cari-pegawai', 'Opd::cari_pegawai');
-$routes->add('/spt/cari-jabatan', 'Admin::cari_jabatan_kosong');
-$routes->add('/spt/(:any)/ubah-data-sk', 'Admin::ubah_sk/$1');
-$routes->add('/spt/(:any)', 'Admin::detail_pengajuan/$1');
-
-
-$routes->add('/pengajuan', 'Admin::pengajuan');
-$routes->add('/pengajuan/buat', 'Admin::buat_pengajuan');
-$routes->add('/pengajuan/filter', 'Admin::filter');
-$routes->add('/pengajuan/hapus_filter', 'Admin::hapus_filter');
-$routes->add('/pengajuan/unggah-spt', 'Admin::unggah_spt');
-$routes->add('/pengajuan/tolak-pengajuan', 'Admin::tolak_pengajuan');
-$routes->add('/pengajuan/(:alpha)', 'Admin::pengajuan/$1');
-$routes->add('/pengajuan/(:any)/proses-pengajuan', 'Admin::proses_pengajuan/$1');
-$routes->add('/pengajuan/(:any)/setujui-pengajuan', 'Admin::setujui_pengajuan/$1');
-$routes->add('/pengajuan/(:any)/ubah-data-sk', 'Admin::ubah_sk/$1');
-$routes->add('/pengajuan/(:any)/selesai', 'Admin::cetak/$1');
-$routes->add('/pengajuan/(:any)/print', 'Admin::cetak/$1');
-$routes->add('/pengajuan/(:any)', 'Admin::detail_pengajuan/$1');
 
 $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->add('users', 'Users::index');
@@ -104,6 +53,36 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->add('users/hapus/(:num)', 'Users::hapus/$1');
     $routes->add('users/reset_pass/(:num)', 'Users::reset_password/$1');
     $routes->add('users/toggle/(:num)', 'Users::toggle_status/$1');
+
+    $routes->add('kabkota', 'Kabkota::index');
+
+    $routes->get('siinas', 'Siinas::index');
+    $routes->get('siinas/tambah', 'Siinas::tambah');
+    $routes->post('siinas/tambah', 'Siinas::store');
+    $routes->get('siinas/ubah/(:num)', 'Siinas::ubah/$1');
+    $routes->post('siinas/ubah', 'Siinas::update');
+    $routes->delete('siinas/(:num)', 'Siinas::hapus/$1');
+
+    $routes->get('blog', 'Blog::index');
+    $routes->get('blog/tambah', 'Blog::tambah');
+    $routes->post('blog/tambah', 'Blog::store');
+    $routes->get('blog/ubah/(:num)', 'Blog::ubah/$1');
+    $routes->post('blog/ubah', 'Blog::update');
+    $routes->delete('blog/(:num)', 'Blog::hapus/$1');
+
+    $routes->get('pelatihan', 'Pelatihan::index');
+    $routes->get('pelatihan/tambah', 'Pelatihan::tambah');
+    $routes->post('pelatihan/tambah', 'Pelatihan::store');
+    $routes->get('pelatihan/ubah/(:num)', 'Pelatihan::ubah/$1');
+    $routes->post('pelatihan/ubah', 'Pelatihan::update');
+    $routes->delete('pelatihan/(:num)', 'Pelatihan::hapus/$1');
+
+    $routes->get('aplikasi', 'Aplikasi::index');
+    $routes->get('aplikasi/tambah', 'Aplikasi::tambah');
+    $routes->post('aplikasi/tambah', 'Aplikasi::store');
+    $routes->get('aplikasi/ubah/(:num)', 'Aplikasi::ubah/$1');
+    $routes->post('aplikasi/ubah', 'Aplikasi::update');
+    $routes->delete('aplikasi/(:num)', 'Aplikasi::hapus/$1');
 });
 $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     // kelurahan kecamatan

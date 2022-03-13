@@ -100,4 +100,57 @@ class Validation
         'nilai_produksi' => ['label' => 'Nilai Produksi', 'rules' => 'trim|required|integer'],
         'nilai_bbbp' => ['label' => 'Nilai BB/BP', 'rules' => 'trim|required|integer'],
     ];
+
+    public $siinas = [
+        'nama_perusahaan' => ['label' => 'Nama Perusahaan', 'rules' => 'trim|required'],
+        'alamat_kantor' => ['label' => 'Alamat Kantor', 'rules' => 'trim|required'],
+        'alamat_pabrik' => ['label' => 'Alamat Pabrik', 'rules' => 'trim|required'],
+        'kode_kbli' => ['label' => 'Kode KBLI', 'rules' => 'trim|required|numeric|max_length[5]'],
+        'bidang_usaha' => ['label' => 'Bidang Usaha', 'rules' => 'trim|required'],
+        'tanggal_registrasi' => ['label' => 'Tanggal Registrasi', 'rules' => 'trim|required']
+    ];
+
+    public $blog = [
+        'title' => ['label' => 'Title', 'rules' => 'required'],
+        'slug' => ['label' => 'Slug', 'rules' => 'required|is_unique[berita.slug,id,{id}]'],
+        'body' => ['label' => 'Body', 'rules' => 'required'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'uploaded[gambar]|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $blog_update = [
+        'title' => ['label' => 'Title', 'rules' => 'required'],
+        'slug' => ['label' => 'Slug', 'rules' => 'required|is_unique[berita.slug,id,{id}]'],
+        'body' => ['label' => 'Body', 'rules' => 'required'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $pelatihan = [
+        'title' => ['label' => 'Title', 'rules' => 'required'],
+        'slug' => ['label' => 'Slug', 'rules' => 'required|is_unique[pelatihan.slug,id,{id}]'],
+        'body' => ['label' => 'Body', 'rules' => 'required'],
+        'lokasi' => ['label' => 'Lokasi', 'rules' => 'required'],
+        'tgl_pelaksanaan' => ['label' => 'Tgl Pelaksanaan', 'rules' => 'required|valid_date'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'uploaded[gambar]|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $pelatihan_update = [
+        'title' => ['label' => 'Title', 'rules' => 'required'],
+        'slug' => ['label' => 'Slug', 'rules' => 'required|is_unique[pelatihan.slug,id,{id}]'],
+        'body' => ['label' => 'Body', 'rules' => 'required'],
+        'lokasi' => ['label' => 'Lokasi', 'rules' => 'required'],
+        'tgl_pelaksanaan' => ['label' => 'Tgl Pelaksanaan', 'rules' => 'required|valid_date'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $aplikasi = [
+        'nama_aplikasi' => ['label' => 'Nama Aplikasi', 'rules' => 'required'],
+        'link' => ['label' => 'Link Aplikasi', 'rules' => 'required|valid_url'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'uploaded[gambar]|max_size[gambar,5120]|is_image[gambar]']
+    ];
+
+    public $aplikasi_update = [
+        'nama_aplikasi' => ['label' => 'Nama Aplikasi', 'rules' => 'required'],
+        'link' => ['label' => 'Link Aplikasi', 'rules' => 'required|valid_url'],
+        'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
+    ];
 }
