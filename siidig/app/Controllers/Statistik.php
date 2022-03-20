@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use App\Models\KabkotaModel;
 
-class Frontend extends BaseController
+class Statistik extends BaseController
 {
-    private $kabkota;
+    protected $kabkota;
 
     public function __construct()
     {
@@ -15,25 +15,20 @@ class Frontend extends BaseController
 
     public function index()
     {
-        $data = [
-            'header' => $this->crud_model->select_data('header', 'getResultArray', ['status' => 'publish']),
-            'pelatihan' => $this->crud_model->select_data('pelatihan', 'getResultArray', ['status' => 'publish', 'tgl_pelaksanaan <=' => date("Y-m-d")], null, ['tgl_pelaksanaan' => 'DESC'], 3),
-            'berita' => $this->crud_model->select_data('berita', 'getResultArray', ['status' => 'publish'], null, ['created_at' => 'DESC'], 3),
-            'aplikasi' => $this->crud_model->select_data('aplikasi', 'getResultArray'),
-            'count' => $this->crud_model->select_data('grafik_tahunan', 'getRow', false, null, ['tahun' => 'DESC'])
-        ];
-        return view('frontend/home', $data);
-    }
-
-    public function statistik()
-    {
+        // $data = [];
         $where = [];
         // d($this->request->getGet());
-        $kabkota = $this->request->getGet('kabkota');
-        if ($kabkota != "") {
-            $where['id'] = $kabkota;
-            $kabkota = $this->kabkota->find($kabkota);
+        if (user('level') == "user") {
+            $where['id'] = user('kabkota_id');
+            $kabkota = $this->kabkota->find(user('kabkota_id'));
             $title_chart_next = ' di ' . ucwords(strtolower($kabkota['nama_kabkota']));
+        } else {
+            $kabkota = $this->request->getGet('kabkota');
+            if ($kabkota != "") {
+                $where['id'] = $kabkota;
+                $kabkota = $this->kabkota->find($kabkota);
+                $title_chart_next = ' di ' . ucwords(strtolower($kabkota['nama_kabkota']));
+            }
         }
 
         $dari_tahun = $this->request->getGet('dari_tahun');
@@ -51,10 +46,31 @@ class Frontend extends BaseController
         if (count($where) > 0) {
             $title_chart = 'Statistik Investasi' . $title_chart_next;
             $statistik_investasi = $this->crud_model->select_data('grafik_kabkota_tahunan', 'getResult', $where, null, ['tahun' => 'ASC']);
+            $title_chart_industri = 'Statistik Industri' . $title_chart_next;
+            $statisktik_industri = $this->crud_model->select_data('grafik_all', 'getResult', $where, null, ['tahun' => 'ASC']);
         } else {
             $title_chart = 'Statistik Investasi';
             $statistik_investasi = $this->crud_model->select_data('grafik_tahunan', 'getResult', false, null, ['tahun' => 'ASC']);
+            $title_chart_industri = 'Statistik Industri';
+            $statisktik_industri = $this->crud_model->select_data('grafik_industri_tahunan', 'getResultArray', false, null, ['tahun' => 'ASC']);
         }
+
+        // $sandang = [];
+        // $pangan = [];
+
+        // $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+        // foreach ($statisktik_industri as $si) {
+        //     $sandang[] = null;
+        //     $pangan[] = null;
+        //     if ($si['industri_id'] == "1") {
+        //         $sandang[] = $si['nilai_investasi'];
+        //     }
+
+
+        // }
+
+        // d($sandang);
+        // return false;
 
 
         $nilai_investasi = [];
@@ -110,10 +126,6 @@ class Frontend extends BaseController
             ],
         ];
 
-
-        // echo json_encode($series, JSON_NUMERIC_CHECK);
-        // return;
-        // dd($series);
         $statistik_tk_now = end($statistik_investasi);
         $series_tk_now = [
             [
@@ -125,7 +137,6 @@ class Frontend extends BaseController
                 'y' => ($statistik_tk_now) ? $statistik_tk_now->tenaga_kerja_perempuan : null
             ],
         ];
-        // dd($statistik_tk_now);
 
         $data = [
             'data' => $statistik_investasi,
@@ -139,45 +150,7 @@ class Frontend extends BaseController
             'count' => $this->crud_model->select_data('grafik_tahunan', 'getRow', false, null, ['tahun' => 'DESC']),
             'filter' => $this->request->getGet()
         ];
-        return view('frontend/statistik', $data);
-    }
-
-    public function pelatihan($id = null)
-    {
-        if ($id !== null) {
-            $pelatihan = $this->crud_model->select_data('pelatihan', 'getRow', ['status' => 'publish', 'slug' => $id]);
-        } else {
-            $pelatihan = $this->crud_model->select_data('pelatihan', 'getResult', ['status' => 'publish'], null, ['tgl_pelaksanaan' => 'DESC']);
-        }
-
-        $data = [
-            'data' => $pelatihan
-        ];
-        if ($id !== null) {
-            return view('frontend/detail_pelatihan', $data);
-        } else {
-            return view('frontend/pelatihan', $data);
-        }
-    }
-
-    public function berita($id = null)
-    {
-        if ($id !== null) {
-            $berita = $this->crud_model->select_data('berita', 'getRow', ['status' => 'publish', 'slug' => $id]);
-            if (!empty($berita)) {
-                $this->crud_model->update_data('berita', ['hits' => $berita->hits + 1], ['id' => $berita->id]);
-            }
-        } else {
-            $berita = $this->crud_model->select_data('berita', 'getResult', ['status' => 'publish'], null, ['created_at' => 'DESC']);
-        }
-
-        $data = [
-            'data' => $berita
-        ];
-        if ($id !== null) {
-            return view('frontend/detail_berita', $data);
-        } else {
-            return view('frontend/berita', $data);
-        }
+        // dd($data);
+        return view('backend/statistik', $data);
     }
 }

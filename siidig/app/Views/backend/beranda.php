@@ -47,6 +47,14 @@
         </div>
       </div>
     <?php endif; ?>
+    <div class="col-12 mb-2 text-center">
+      <div class="border border-info px-3 py-2 rounded">
+        <span class="text-black font-weight-bold">
+          <i class="fas fa-info-circle fa-fw"></i>
+          Tambahkan <span class="text-primary font-weight-bolder">(000)</span> Untuk Statistik dibawah Ini. Kecuali Unit Usaha dan Tenaga Kerja
+        </span>
+      </div>
+    </div>
     <div class="col-lg-3 col-md-6 col-12">
       <!-- small card -->
       <div class="small-box bg-gradient-info shadow-sm">
@@ -96,8 +104,11 @@
       </div>
     </div>
 
-    <div class="col-12">
+    <div class="col-md-7">
       <div class="p-4 rounded-lg bg-white shadow" id="container"></div>
+    </div>
+    <div class="col-md-5">
+      <div class="p-4 rounded-lg bg-white shadow" id="container2"></div>
     </div>
   </div>
 </div>
@@ -106,7 +117,66 @@
 <?= $this->section('script'); ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
+  Highcharts.setOptions({
+    lang: {
+      thousandsSep: '.'
+    }
+  })
+
   Highcharts.chart('container', {
+
+    title: {
+      text: 'Statistik Perkembangan Tiap Tahun'
+    },
+
+    subtitle: {
+      text: 'Semua data di grafik belum ditambah (.000)'
+    },
+
+    yAxis: {
+      title: {
+        text: ''
+      }
+    },
+
+    xAxis: {
+      categories: <?= json_encode($xaxis); ?>,
+    },
+
+    tooltip: {
+      valuePrefix: 'Rp. ',
+    },
+
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
+    },
+
+    series: <?= json_encode($series1); ?>,
+
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    },
+    credits: {
+      text: 'SIIDIG',
+      // href: 'http://www.yourcompany.com'
+    }
+
+  });
+
+  Highcharts.chart('container2', {
 
     title: {
       text: 'Statistik Perkembangan Tiap Tahun'
@@ -133,7 +203,7 @@
       verticalAlign: 'middle'
     },
 
-    series: <?= json_encode($series); ?>,
+    series: <?= json_encode($series2); ?>,
 
     responsive: {
       rules: [{

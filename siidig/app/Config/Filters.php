@@ -34,9 +34,9 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            'auth' => ['except' => ['login', 'frontend/*', 'frontend/index', '/']],
+            'auth' => ['except' => ['login', '/', '/statistik', '/course', '/course/*', '/berita', '/berita/*']],
             // 'honeypot',
-            // 'csrf',
+            'csrf',
         ],
         'after' => [
             'toolbar',

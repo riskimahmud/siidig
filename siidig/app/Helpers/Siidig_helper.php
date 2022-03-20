@@ -121,9 +121,13 @@ function generateBadge($class, $msg)
     return $ret;
 }
 
-function angkaInvestasi($angka)
+function angkaInvestasi($angka, $rp = true)
 {
-    $hasil_rupiah = "Rp " . number_format($angka . '000', 0, ',', '.');
+    if ($rp) {
+        $hasil_rupiah = "Rp " . number_format($angka, 0, ',', '.');
+    } else {
+        $hasil_rupiah = number_format($angka, 0, ',', '.');
+    }
     return $hasil_rupiah;
 }
 

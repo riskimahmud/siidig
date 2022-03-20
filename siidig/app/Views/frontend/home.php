@@ -168,7 +168,7 @@
 
                         <div class="-cta-btn mt70">
                             <div class="free-cta-title v-center  wow zoomInDown" data-wow-delay=".9s">
-                                <a href="#" class="btn-main bg-btn2 lnk">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
+                                <a href="/statistik" class="btn-main bg-btn2 lnk">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></a>
                             </div>
                         </div>
                     </div>
@@ -305,7 +305,9 @@
                         <div class="col-lg-4 col-sm-6 shape-loc wow fadeIn" data-wow-delay=".2s">
                             <div class="office-card hoshd">
                                 <div class="landscp">
-                                    <img src="/uploads/pelatihan/thumb_<?= $pel['gambar']; ?>" alt="pelatihan" class="img-fluid" />
+                                    <a href="<?= base_url("/course/" . $pel['slug']); ?>">
+                                        <img src="/uploads/pelatihan/thumb_<?= $pel['gambar']; ?>" alt="pelatihan" class="img-fluid" />
+                                    </a>
                                 </div>
                                 <div class="info-text-div">
                                     <h4><?= $pel['title']; ?></h4>
@@ -396,7 +398,7 @@
                     <div class="col-lg-4 col-sm-6 mt30">
                         <div class="single-blog-post- up-hor shdo">
                             <div class="single-blog-img-">
-                                <a href="#"><img src="/uploads/berita/thumb_<?= $ber['gambar']; ?>" alt="gambar" class="img-fluid" /></a>
+                                <a href="<?= base_url("berita/" . $ber['slug']); ?>"><img src="/uploads/berita/thumb_<?= $ber['gambar']; ?>" alt="gambar" class="img-fluid" /></a>
                                 <div class="entry-blog-post dg-bg2">
                                     <span class="bypost-"><a href="javascript:void(0)"><i class="fas fa-user fa-fw"></i> <?= $ber['penulis'] ?></a></span>
                                     <span class="posted-on-">
@@ -406,7 +408,7 @@
                             </div>
                             <div class="blog-content-tt">
                                 <div class="single-blog-info-">
-                                    <h4><a href="#"><?= $ber['title']; ?></a></h4>
+                                    <h4><a href="<?= base_url("berita/" . $ber['slug']); ?>"><?= $ber['title']; ?></a></h4>
                                     <p><?= $ber['excerpt'] ?></p>
                                 </div>
                             </div>
@@ -476,14 +478,6 @@
                             </div>
                         </a>
                     </div>
-                    <div class="text-fieds- mt40">
-                        <h4>& What's you will get :</h4>
-                        <ul class="list-style- mt10">
-                            <li> Excellent Customer Support</li>
-                            <li>Project Consulting by Experts</li>
-                            <li>On-Time Project Delivery</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -491,46 +485,19 @@
                     <div class="form-block">
                         <form action="#" id="quotes-form" method="post">
                             <div class="fieldsets row">
-                                <div class="col-md-6 form-group floating-label">
+                                <div class="col-md-12 form-group floating-label">
                                     <input type="text" placeholder=" " required="required" class="floating-input">
                                     <label>Full Name*</label>
                                 </div>
+                            </div>
+                            <div class="fieldsets row">
                                 <div class="col-md-6 form-group floating-label">
                                     <input type="email" placeholder=" " required="required" class="floating-input">
                                     <label>Email Address*</label>
                                 </div>
-                            </div>
-                            <div class="fieldsets row">
                                 <div class="col-md-6 form-group floating-label">
                                     <input type="tel" placeholder=" " required="required" class="floating-input">
                                     <label>Mobile Number*</label>
-                                </div>
-                                <div class="col-md-6 form-group floating-label">
-                                    <select required="required" class="floating-select">
-                                        <option value="">&nbsp;</option>
-                                        <option value="Graphic Design">Graphic Design</option>
-                                        <option value="Web Design">Web Design</option>
-                                        <option value="App Design">App Design</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                    <label>Interested In*</label>
-                                </div>
-                            </div>
-                            <div class="fieldsets row">
-                                <div class="col-md-6 form-group floating-label">
-                                    <select required="required" class="floating-select">
-                                        <option value="">&nbsp;</option>
-                                        <option value="#">Less than $500</option>
-                                        <option value="#">$500 - $1000</option>
-                                        <option value="#">$1000 - $2000</option>
-                                        <option value="#">$2000 - $300</option>
-                                        <option value="#">$3000+ </option>
-                                    </select>
-                                    <label>Your Budget*</label>
-                                </div>
-                                <div class="col-md-6 form-group floating-label">
-                                    <input type="text" placeholder=" " required="required" class="floating-input">
-                                    <label>Skype ID/Whatsapp No.*</label>
                                 </div>
                             </div>
                             <div class="fieldsets row">

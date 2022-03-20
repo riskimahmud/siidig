@@ -34,41 +34,47 @@ class Backend extends BaseController
                 array_push($jumlah_produksi, intval($gt->jumlah_produksi . '000'));
                 array_push($nilai_produksi, intval($gt->nilai_produksi . '000'));
                 array_push($nilai_bbbp, intval($gt->nilai_bbbp . '000'));
-                array_push($unit_usaha, intval($gt->unit_usaha . '000'));
-                array_push($tenaga_kerja, intval($gt->tenaga_kerja . '000'));
+                array_push($unit_usaha, intval($gt->unit_usaha));
+                array_push($tenaga_kerja, intval($gt->tenaga_kerja));
                 array_push($tahun, intval($gt->tahun));
             }
-            $series = [
+            $series1 = [
                 ['name' => 'Nilai Investasi', 'data' => $nilai_investasi],
                 ['name' => 'Jumlah Produksi', 'data' => $jumlah_produksi],
                 ['name' => 'Nilai Produksi', 'data' => $nilai_produksi],
                 ['name' => 'Nilai BBBP', 'data' => $nilai_bbbp],
+            ];
+            $series2 = [
                 ['name' => 'Unit Usaha', 'data' => $unit_usaha],
                 ['name' => 'Tenaga Kerja', 'data' => $tenaga_kerja],
             ];
-            $data['series'] =   $series;
+            $data['series1'] =   $series1;
+            $data['series2'] =   $series2;
             $data['xaxis']  =   $tahun;
         } else {
             $data['statistik_all']  =   $this->crud_model->select_data('grafik_tahunan', 'getRow', null, null, ['tahun' => 'DESC']);
             $grafik_tahunan =   $this->crud_model->select_data('grafik_tahunan', 'getResult', null, null, ['tahun' => 'ASC']);
             foreach ($grafik_tahunan as $gt) {
-                array_push($nilai_investasi, intval($gt->nilai_investasi . '000'));
-                array_push($jumlah_produksi, intval($gt->jumlah_produksi . '000'));
-                array_push($nilai_produksi, intval($gt->nilai_produksi . '000'));
-                array_push($nilai_bbbp, intval($gt->nilai_bbbp . '000'));
-                array_push($unit_usaha, intval($gt->unit_usaha . '000'));
-                array_push($tenaga_kerja, intval($gt->tenaga_kerja . '000'));
+                array_push($nilai_investasi, intval($gt->nilai_investasi));
+                array_push($jumlah_produksi, intval($gt->jumlah_produksi));
+                array_push($nilai_produksi, intval($gt->nilai_produksi));
+                array_push($nilai_bbbp, intval($gt->nilai_bbbp));
+                array_push($unit_usaha, intval($gt->unit_usaha));
+                array_push($tenaga_kerja, intval($gt->tenaga_kerja));
                 array_push($tahun, intval($gt->tahun));
             }
-            $series = [
+            $series1 = [
                 ['name' => 'Nilai Investasi', 'data' => $nilai_investasi],
                 ['name' => 'Jumlah Produksi', 'data' => $jumlah_produksi],
                 ['name' => 'Nilai Produksi', 'data' => $nilai_produksi],
                 ['name' => 'Nilai BBBP', 'data' => $nilai_bbbp],
+            ];
+            $series2 = [
                 ['name' => 'Unit Usaha', 'data' => $unit_usaha],
                 ['name' => 'Tenaga Kerja', 'data' => $tenaga_kerja],
             ];
-            $data['series'] =   $series;
+            $data['series1'] =   $series1;
+            $data['series2'] =   $series2;
             $data['xaxis']  =   $tahun;
         }
         // dd($data);

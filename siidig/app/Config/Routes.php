@@ -32,6 +32,11 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Frontend::index');
+$routes->get('/statistik', 'Frontend::statistik');
+$routes->get('/course', 'Frontend::pelatihan');
+$routes->get('/course/(:any)', 'Frontend::pelatihan/$1');
+$routes->get('/berita', 'Frontend::berita');
+$routes->get('/berita/(:any)', 'Frontend::berita/$1');
 $routes->post('/login', 'Login::do_login');
 $routes->get('/logout', 'Login::logout');
 
@@ -45,6 +50,8 @@ $routes->add('/profil', 'Backend::profil');
 
 $routes->add('/laporan', 'Admin::laporan');
 $routes->add('/cari_laporan', 'Admin::cari_laporan');
+
+$routes->get('/grafik', 'Statistik::index', ['filter' => 'auth']);
 
 $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->add('users', 'Users::index');

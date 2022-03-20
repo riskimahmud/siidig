@@ -8,9 +8,9 @@
                 <div class="card-header">
                     <h3 class="card-title"><?= $title; ?></h3>
 
-                    <div class="card-tools">
+                    <!-- <div class="card-tools">
                         <a href="<?= base_url("/kabkota/tambah"); ?>" class="btn btn-primary btn-sm"> <i class="fas fa-plus-circle fa-fw"></i> Tambah Data</a>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive">
@@ -19,7 +19,7 @@
                             <tr>
                                 <th width="10">No</th>
                                 <th>Nama Kabupaten/Kota</th>
-                                <th>Aksi</th>
+                                <!-- <th>Aksi</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -30,14 +30,14 @@
                                     <td>
                                         <?= $d['nama_kabkota']; ?>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div class="btn-group btn-group-sm">
                                             <a title="Ubah" class="btn btn-default
                                         " href="<?= base_url("kabkota/ubah/" . $d['id']); ?>"><i class="fas fa-edit fa-sm text-info"></i></a>
                                             <a title="Hapus" class="delete btn btn-default
                                         " href="<?= base_url("kabkota/hapus/" . $d['id']); ?>"><i class="fas fa-trash-alt fa-sm text-danger"></i></a>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

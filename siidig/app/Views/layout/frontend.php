@@ -20,6 +20,8 @@
     <link href="/assets_front/css/style.css" rel="stylesheet">
     <link href="/assets_front/css/responsive.css" rel="stylesheet">
     <link href="/assets_front/css/darkmode.css" rel="stylesheet">
+
+    <?= $this->renderSection('css') ?>
     <style>
         html {
             scroll-behavior: smooth;
@@ -84,6 +86,8 @@
     <script src="/assets_front/js/dark-mode.js"></script>
     <!--common script file-->
     <script src="/assets_front/js/main.js"></script>
+
+    <?= $this->renderSection('script'); ?>
 </body>
 
 </html>
