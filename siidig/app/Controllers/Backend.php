@@ -83,7 +83,8 @@ class Backend extends BaseController
 
     public function coba()
     {
-        echo phpinfo();
+        return view('frontend/testing');
+        // echo phpinfo();
     }
 
     // profil
@@ -126,74 +127,40 @@ class Backend extends BaseController
         }
     }
 
-    public function cek_tmt()
+    public function kontak()
     {
-        $msg    =   '';
-        $cek_tmt    =   $this->crud_model->select_data("pengajuan", "getNumRows", [
-            "tmt <="    =>  date("Y-m-d"),
-            "sinkron_simpeg"    =>  ""
-        ]);
-        $cek_pelantikan    =   $this->crud_model->select_data("pelantikan", "getNumRows", [
-            "tgl_berlaku <="    =>  date("Y-m-d"),
-            "sinkron_simpeg"    =>  ""
-        ]);
-
-        // $msg    =   "";
-
-        if ($cek_tmt > 0) {
-            $pegawai    =   $this->crud_model->select_field("nama, nip", "pengajuan", "getResult", [
-                "tmt <="    =>  date("Y-m-d"),
-                "sinkron_simpeg"    =>  ""
-            ]);
-            $msg    .=  "SPT dari :\n";
-            $no_peg =   1;
-            foreach ($pegawai as $peg) {
-                if ($no_peg > 1) {
-                    $msg    .=  "\n";
-                }
-                $msg    .=  $peg->nip . ", " . $peg->nama;
-                $no_peg++;
-            }
-            $msg .= "\nBelum di Sinkron\n\n";
-        }
-
-        if ($cek_pelantikan > 0) {
-            $msg    .=  "Ada $cek_pelantikan Pelantikan Yang Belum Di Sinkron";
-        }
-
-        if ($cek_tmt > 0 || $cek_pelantikan > 0) {
-            $url = "https://api.telegram.org/bot1868733615:AAHZ3HM2Y_3xrYCuXj-RWqAQ5Tldnh4EzIE/sendMessage?parse_mode=markdown&chat_id=440788483";
-            $url = $url . "&text=" . urlencode($msg);
-            $ch = curl_init();
-            $optArray = array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true
-            );
-            curl_setopt_array($ch, $optArray);
-            $result = curl_exec($ch);
-            $err = curl_error($ch);
-            curl_close($ch);
-
-            if ($err) {
-                echo 'Pesan gagal terkirim, error :' . $err;
-            } else {
-                echo 'Pesan terkirim';
-            }
-        }
+        $data = [
+            'title' => 'Daftar Pesan Dari User',
+            'data' => $this->crud_model->select_data("kontak", "getResult", false, null, ['created_at' => 'DESC'])
+        ];
+        return view('backend/kontak/index', $data);
     }
 
-    public function cek_spt($id = null)
+    public function detail_kontak($id = null)
     {
         if ($id === null) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Akses ditolak', 0);
+            $res = [
+                'status' => false,
+                'message' => 'ID Kosong'
+            ];
+            // return json_encode($res);
+            return $this->response->setJSON($res);
         }
 
-        $pengajuan = $this->crud_model->select_data("pengajuan", "getRow", ["pengajuan_id" => $id, "status" => "4"]);
-        if (empty($pengajuan)) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data tidak ditemukan', 0);
+        $data = $this->crud_model->select_data('kontak', 'getRow', ['id' => $id]);
+        if ($data) {
+            $this->crud_model->update_data('kontak', ['status' => '1'], ['id' => $id]);
+            $res = [
+                'status' => true,
+                'message' => 'Data ditemukan',
+                'data' => $data
+            ];
+        } else {
+            $res = [
+                'status' => false,
+                'message' => 'Data tidak ditemukan',
+            ];
         }
-
-        $data['pengajuan']  =   $pengajuan;
-        return view('cek_spt', $data);
+        return $this->response->setJSON($res);
     }
 }

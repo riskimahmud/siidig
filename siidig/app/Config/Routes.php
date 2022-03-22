@@ -37,6 +37,8 @@ $routes->get('/course', 'Frontend::pelatihan');
 $routes->get('/course/(:any)', 'Frontend::pelatihan/$1');
 $routes->get('/berita', 'Frontend::berita');
 $routes->get('/berita/(:any)', 'Frontend::berita/$1');
+$routes->get('/get-informasi', 'Informasi::get_info');
+$routes->post('/kontak', 'Frontend::kontak');
 $routes->post('/login', 'Login::do_login');
 $routes->get('/logout', 'Login::logout');
 
@@ -48,12 +50,15 @@ $routes->get('/testing', 'Backend::coba');
 // $routes->add('/cetak_laporan', 'Laporan::cetak');
 $routes->add('/profil', 'Backend::profil');
 
-$routes->add('/laporan', 'Admin::laporan');
-$routes->add('/cari_laporan', 'Admin::cari_laporan');
+// $routes->add('/laporan', 'Admin::laporan');
+// $routes->add('/cari_laporan', 'Admin::cari_laporan');
 
 $routes->get('/grafik', 'Statistik::index', ['filter' => 'auth']);
 
 $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
+    $routes->get('kontak', 'Backend::kontak');
+    $routes->get('get-kontak/(:num)', 'Backend::detail_kontak/$1');
+
     $routes->add('users', 'Users::index');
     $routes->add('users/tambah', 'Users::tambah');
     $routes->add('users/ubah/(:num)', 'Users::ubah/$1');
@@ -69,6 +74,10 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->get('siinas/ubah/(:num)', 'Siinas::ubah/$1');
     $routes->post('siinas/ubah', 'Siinas::update');
     $routes->delete('siinas/(:num)', 'Siinas::hapus/$1');
+
+    $routes->get('informasi', 'Informasi::index');
+    $routes->get('informasi/ubah/(:num)', 'Informasi::ubah/$1');
+    $routes->post('informasi/ubah', 'Informasi::update');
 
     $routes->get('blog', 'Blog::index');
     $routes->get('blog/tambah', 'Blog::tambah');
@@ -97,6 +106,9 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->get('header/ubah/(:num)', 'Header::ubah/$1');
     $routes->post('header/ubah', 'Header::update');
     $routes->delete('header/(:num)', 'Header::hapus/$1');
+
+    $routes->get('laporan', 'Admin::laporan_investasi');
+    $routes->get('laporan/(:num)', 'Admin::laporan_investasi_detail/$1');
 });
 $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     // kelurahan kecamatan

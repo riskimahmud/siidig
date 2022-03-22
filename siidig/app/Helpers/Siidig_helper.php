@@ -163,3 +163,11 @@ function singkat_angka($n, $format, $presisi = 1)
         return $format_angka . $simbol;
     }
 }
+
+function getKontak()
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('kontak');
+    $builder->where('status', '0');
+    return $builder->countAllResults();
+}

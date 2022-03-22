@@ -196,7 +196,7 @@
                     <div class="block-space-">
                         <!-- <span>PPC</span> -->
                         <h4>Syarat Kemasan</h4>
-                        <a href="javascript:void(0)">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
+                        <a href="javascript:void(0)" class="informasi" data-slug="kemasan">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
                     </div>
                 </div>
             </div>
@@ -204,8 +204,8 @@
                 <div class="wide-block service-img2" data-tilt data-tilt-max="2" data-tilt-speed="600">
                     <div class="block-space-">
                         <!-- <span>MARKETING </span> -->
-                        <h4>Syarat Halal</h4>
-                        <a href="javascript:void(0)">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
+                        <h4>Fasilitasi Halal</h4>
+                        <a href="javascript:void(0)" class="informasi" data-slug="halal">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
                     </div>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                     <div class="block-space-">
                         <!-- <span>SEO</span> -->
                         <h4>Syarat PKP</h4>
-                        <a href="javascript:void(0)">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
+                        <a href="javascript:void(0)" class="informasi" data-slug="pkp">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
                     <div class="block-space-">
                         <!-- <span>WEB DESIGN</span> -->
                         <h4>Syarat HKI</h4>
-                        <a href="javascript:void(0)">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
+                        <a href="javascript:void(0)" class="informasi" data-slug="haki">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
                     </div>
                 </div>
             </div>
@@ -461,7 +461,7 @@
                             <div class="icon-fld-nx v-center">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <div class="text-fld-nx v-center">
+                            <div class="text-fld-nx v-center overflow-hidden">
                                 <span class="small-text rows">Hubungi Kami Lewat Email</span>
                                 <span class="large-text rows">diskumperindag@gorontaloprov.go.id</span>
                             </div>
@@ -482,41 +482,204 @@
             </div>
             <div class="col-lg-7">
                 <div class="contact-form-card-pr contact-block-btm">
+                    <?= \Config\Services::validation()->listErrors(); ?>
                     <div class="form-block">
-                        <form action="#" id="quotes-form" method="post">
-                            <div class="fieldsets row">
-                                <div class="col-md-12 form-group floating-label">
-                                    <input type="text" placeholder=" " required="required" class="floating-input">
-                                    <label>Full Name*</label>
-                                </div>
+                        <!-- <form action="#" id="quotes-form" method="post"> -->
+                        <!-- <form action="javascript:void(0)" name="ajax_form" id="ajax_form" method="post" accept-charset="utf-8"> -->
+                        <?= form_open('javascript:void(0)', ['autocomplete' => 'off', 'id' => 'ajax_form']); ?>
+                        <div class="fieldsets row">
+                            <div class="col-md-12 form-group floating-label">
+                                <input type="text" name="nama" placeholder=" " class="floating-input" required id="nama">
+                                <label>Full Name*</label>
                             </div>
-                            <div class="fieldsets row">
-                                <div class="col-md-6 form-group floating-label">
-                                    <input type="email" placeholder=" " required="required" class="floating-input">
-                                    <label>Email Address*</label>
-                                </div>
-                                <div class="col-md-6 form-group floating-label">
-                                    <input type="tel" placeholder=" " required="required" class="floating-input">
-                                    <label>Mobile Number*</label>
-                                </div>
+                        </div>
+                        <div class="fieldsets row">
+                            <div class="col-md-6 form-group floating-label">
+                                <input type="email" name="email" placeholder=" " class="floating-input">
+                                <label>Email Address*</label>
                             </div>
-                            <div class="fieldsets row">
-                                <div class="col-md-12 form-group floating-label">
-                                    <textarea placeholder=" " required="required" class="floating-input"></textarea>
-                                    <label>Message*</label>
-                                </div>
+                            <div class="col-md-6 form-group floating-label">
+                                <input type="tel" name="telp" placeholder=" " class="floating-input">
+                                <label>Mobile Number*</label>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" checked="checked">
-                                <label class="custom-control-label" for="customCheck">I agree to the <a href="javascript:void(0)">Terms &amp; Conditions</a> of Business Name.</label>
+                        </div>
+                        <div class="fieldsets row">
+                            <div class="col-md-12 form-group floating-label">
+                                <textarea placeholder=" " name="pesan" class="floating-input"></textarea>
+                                <label>Message*</label>
                             </div>
-                            <div class="fieldsets mt20"> <button type="submit" name="submit" class="lnk btn-main bg-btn">Submit <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></button> </div>
-                            <p class="trm"><i class="fas fa-lock"></i>We hate spam, and we respect your privacy.</p>
-                        </form>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1" checked="checked">
+                            <label class="custom-control-label" for="customCheck">I agree to the <a href="javascript:void(0)">Terms &amp; Conditions</a> of Business Name.</label>
+                        </div>
+                        <div class="fieldsets mt20">
+                            <button type="submit" name="submit" class="btn-main bg-btn" id="send_form">
+                                Submit <i class="fas fa-chevron-right fa-icon"></i>
+                                <span class="circle"></span>
+                            </button>
+                        </div>
+                        <p class="trm"><i class="fas fa-lock"></i>We hate spam, and we respect your privacy.</p>
+                        <?= form_close(); ?>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div class="popup-modalfull">
+    <div class="modal" id="modal-informasi">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="closes abt" id="closeModal" data-bs-dismiss="modal">&times;</button>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 text-center">
+                                <h3 class="mb10" id="modal-title">Popup Modal Form</h3>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt30">
+                            <div class="col-md-9" id="modal-body">
+                                <div class="form-block fdgn2 mt10 mb10">
+                                    <form action="#" method="post" name="feedback-form">
+                                        <div class="fieldsets row">
+                                            <div class="col-md-6"><input type="text" placeholder="Full Name" name="name"></div>
+                                            <div class="col-md-6"><input type="email" placeholder="Email Address" name="email"></div>
+                                        </div>
+                                        <div class="fieldsets row">
+                                            <div class="col-md-6 form-group">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                        <select required="required" style="padding: 0px 5px;">
+                                                            <option value="">IN +91</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-8 pl5">
+                                                        <input type="text" name="phone" placeholder="Phone No*" required="required">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <select required="required">
+                                                    <option value="">Interested In*</option>
+                                                    <option value="Graphic Design">Graphic Design</option>
+                                                    <option value="Web Design">Web Design</option>
+                                                    <option value="App Design">App Design</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="fieldsets row">
+                                            <div class="col-md-6">
+                                                <select required="required">
+                                                    <option value="">Your Budget*</option>
+                                                    <option value="Less than $5,000">Less than $5,000</option>
+                                                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                                                    <option value="$10,000 - $20,000">$10,000 - $20,000</option>
+                                                    <option value="$20,000 - $35,000">$20,000 - $35,000</option>
+                                                    <option value="$35,000 - $50,000">$35,000 - $50,000</option>
+                                                    <option value="$50,000 - $1,00,000">$50,000 - $1,00,000</option>
+                                                    <option value="$1,00,000+">$1,00,000+</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6"><input type="text" name="phone" placeholder="Skype ID/Whatsapp No." required="required"></div>
+                                        </div>
+                                        <div class="fieldsets row">
+                                            <div class="col-md-12"><textarea placeholder="Message" name="message"></textarea></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 form-group">
+                                                <div class="custom-file">
+                                                    <input class="form-control form-control-lg" id="formFileLg" type="file">
+                                                </div>
+                                                <p><small>Please upload maximum 5 files Only pdf, docx and doc files.</small></p>
+                                            </div>
+                                        </div>
+                                        <div class="fieldsets row mt30 pb20 justify-content-center">
+                                            <div class="col-md-8">
+                                                <button type="submit" name="submit" class="lnk btn-main bg-btn" data-bs-dismiss="modal">Submit <i class="fas fa-chevron-right fa-icon"></i><span class="circle"></span></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection(); ?>
+
+<?= $this->section('script') ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script> -->
+<script>
+    $(".informasi").on("click", function(e) {
+        const slug = $(this).data('slug');
+        // alert(slug);
+        $.ajax({
+            url: "<?= site_url('/get-informasi') ?>",
+            data: "slug=" + slug,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                if (data.status === true) {
+                    $("#modal-title").html(data.data.title);
+                    $("#modal-body").html(data.data.body);
+                    $("#modal-informasi").toggle('modal');
+                }
+                // console.log(data);
+            }
+        });
+    })
+
+    $("#closeModal").on("click", function(e) {
+        $("#modal-title").html('');
+        $("#modal-body").html('');
+        $("#modal-informasi").toggle('modal');
+    })
+
+    $("#ajax_form").on('submit', function(e) {
+        // alert('ini');
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        $.ajax({
+            url: "<?= site_url('/kontak') ?>",
+            type: "POST",
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "JSON",
+            success: function(data) {
+                if (data.success == true) {
+                    // alert('oke');
+                    Swal.fire('Terkirim!', '', 'success')
+                } else {
+                    Swal.fire('Gagal!', '', 'error')
+
+                }
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Swal.fire('Gagal!', '', 'error')
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                // alert('Error at add data');
+            }
+        });
+    });
+</script>
+<?= $this->endSection() ?>

@@ -81,7 +81,7 @@
     <script src="/assets_front/js/plugin.min.js"></script>
     <script src="/assets_front/js/swiper.min.js"></script>
     <script src="/assets_front/js/preloader.js"></script>
-    <script src="/assets_front/js/tweenmax.min.js"></script>
+    <!-- <script src="/assets_front/js/tweenmax.min.js"></script> -->
     <!-- <script src="/assets_front/js/gdprcookies.js"></script> -->
     <script src="/assets_front/js/dark-mode.js"></script>
     <!--common script file-->

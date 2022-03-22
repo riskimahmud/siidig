@@ -167,4 +167,9 @@ class Validation
         'link' => ['label' => 'Link', 'rules' => 'permit_empty|valid_url'],
         'gambar' => ['label' => 'Gambar', 'rules' => 'permit_empty|max_size[gambar,5120]|is_image[gambar]']
     ];
+
+    public $informasi = [
+        'title' => ['label' => 'Title', 'rules' => 'required'],
+        'body' => ['label' => 'Isi', 'rules' => 'required'],
+    ];
 }

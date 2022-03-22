@@ -180,4 +180,40 @@ class Frontend extends BaseController
             return view('frontend/berita', $data);
         }
     }
+
+    // kirim pesan
+    public function kontak()
+    {
+        if (!$this->validate([
+            'nama' => 'required',
+            'telp' => 'required|min_length[9]|numeric',
+            'email'    => 'required|valid_email',
+            'pesan' => 'required'
+        ])) {
+            $data = [
+                'success' => false,
+                'data' => [],
+                'msg' => "Gagal."
+            ];
+            return $this->response->setJSON($data);
+        }
+
+        $data_kontak = [
+            'nama' => $this->request->getPost('nama'),
+            'telp' => $this->request->getPost('telp'),
+            'email' => $this->request->getPost('email'),
+            'pesan' => $this->request->getPost('pesan'),
+            'created_at' => date("Y-m-d H:i:s")
+        ];
+
+        $this->crud_model->insert_data('kontak', $data_kontak);
+
+        $data = [
+            'success' => true,
+            'data' => [],
+            'msg' => "Thanks for contact us. We get back to you"
+        ];
+
+        return $this->response->setJSON($data);
+    }
 }
