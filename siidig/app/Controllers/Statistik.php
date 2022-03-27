@@ -58,7 +58,8 @@ class Statistik extends BaseController
         // $sandang = [];
         // $pangan = [];
 
-        // $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+        // $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun DESC limit 1", "getRow");
+        // dd($tahun);
         // foreach ($statisktik_industri as $si) {
         //     $sandang[] = null;
         //     $pangan[] = null;

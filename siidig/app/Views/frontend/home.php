@@ -47,11 +47,12 @@
 <!--End Header -->
 
 <!--Start Hero-->
-<section class="hero-slider hero-style" id="home">
-    <div class="swiper-container">
-        <!-- start swiper-wrapper -->
-        <div class="swiper-wrapper">
-            <?php if ($header) : ?>
+<?php if ($header) : ?>
+    <section class="hero-slider hero-style position-relative" id="home">
+        <a href="#stat" class="btn lnk wow fadeInUp position-absolute" style="z-index: 10000; margin: auto; left: 44.5%; bottom: 20px;" data-wow-delay=".6s"><i class="fas fa-chevron-down fa-down text-white fa-2x"></i></a>
+        <div class="swiper-container">
+            <!-- start swiper-wrapper -->
+            <div class="swiper-wrapper">
                 <?php foreach ($header as $h) : ?>
                     <div class="swiper-slide">
                         <div class="slide-inner slide-bg-image" data-background="uploads/header/<?= $h['gambar']; ?>">
@@ -73,8 +74,7 @@
                     </div>
                 <?php endforeach; ?>
                 <!--slider 1 start -->
-            <?php else : ?>
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                     <div class="slide-inner slide-bg-image" data-background="assets_front/images/hero/3.png">
                         <div class="container">
                             <div data-swiper-parallax="300" class="slide-title">
@@ -89,18 +89,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endif; ?>
-            <!--slider 1 end -->
+                </div> -->
+                <!--slider 1 end -->
+            </div>
+            <!-- end swiper-wrapper -->
+            <!-- swipper controls -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- swipper controls -->
         </div>
-        <!-- end swiper-wrapper -->
-        <!-- swipper controls -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <!-- swipper controls -->
-    </div>
-</section>
+    </section>
+<?php else : ?>
+    <!--Start Hero-->
+    <section class="hero-section hero-bg-bg1 bg-gradient-blue" id="home">
+        <video class="full-video" data-mask="3" src="images/hero/home-digital-agency-2.mp4" autoplay="" muted="" loop=""></video>
+        <div class="text-block niwax" data-rellax-speed="-3">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-9 v-center">
+                        <div class="header-heading">
+                            <h1 class="wow fadeInUp text-white" data-wow-delay=".2s">Selamat Datang</h1>
+                            <p class="wow fadeInUp text-white-50" data-wow-delay=".4s">Sistem Informasi Industri Gorontalo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#stat" class="btn lnk wow fadeInUp pt-5 mt-5" data-wow-delay=".6s"><i class="fas fa-chevron-down fa-down text-white fa-2x"></i></a>
+    </section>
+    <!--End Hero-->
+<?php endif; ?>
 <!--End Hero-->
 
 
