@@ -148,17 +148,27 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7 mb-3">
                     <div class="s-block bd-hor-base px-1 py-1 m-0">
                         <div class="nn-card-set">
                             <div class="p-0 m-0" id="tk_unitusaha"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-5 mb-3">
                     <div class="s-block bd-hor-base px-1 py-1 m-0">
                         <div class="nn-card-set">
                             <div class="p-0 m-0" id="tenagaKerja"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-12 mt30">
+                    <div class="s-block bd-hor-base">
+                        <div class="nn-card-set">
+                            <div id="industri"></div>
                         </div>
                     </div>
                 </div>
@@ -396,6 +406,43 @@
             text: 'SIIDIG',
             // href: 'http://www.yourcompany.com'
         }
+    });
+
+    Highcharts.chart('industri', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Nilai Investasi Berdasarkan Jenis Industri'
+        },
+        subtitle: {
+            // text: 'Source: WorldClimate.com'
+        },
+        xAxis: {
+            categories: <?= json_encode($xaxis); ?>,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Rupiah'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>Rp.{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: <?= json_encode($series_industri, JSON_NUMERIC_CHECK) ?>
     });
 </script>
 <?= $this->endSection() ?>
