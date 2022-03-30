@@ -110,10 +110,6 @@ class Frontend extends BaseController
             ],
         ];
 
-
-        // echo json_encode($series, JSON_NUMERIC_CHECK);
-        // return;
-        // dd($series);
         $statistik_tk_now = end($statistik_investasi);
         $series_tk_now = [
             [
@@ -125,7 +121,54 @@ class Frontend extends BaseController
                 'y' => ($statistik_tk_now) ? $statistik_tk_now->tenaga_kerja_perempuan : null
             ],
         ];
-        // dd($statistik_tk_now);
+
+        $sandang = ['name' => 'SANDANG'];
+        $pangan = ['name' => 'PANGAN'];
+        $kimia = ['name' => 'KIMIA & BAHAN BANGUNAN'];
+        $kerajinan = ['name' => 'KERAJINAN'];
+        $logam = ['name' => 'INDUSTRI LOGAM & ELEKTRONIK'];
+        $xaxis_industri = [];
+
+        $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+        $industri = $this->crud_model->select_custom("select * from industri");
+        foreach ($tahun as $t) {
+            $xaxis_industri[] = $t->tahun;
+            if ($kabkota != "") {
+                $q_sandang = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '1', 'tahun' => $t->tahun]));
+            } else {
+                $q_sandang = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '1', 'tahun' => $t->tahun]);
+            }
+            (empty($q_sandang)) ? $sandang['data'][] = 0 : $sandang['data'][] = $q_sandang->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_pangan = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '2', 'tahun' => $t->tahun]));
+            } else {
+                $q_pangan = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '2', 'tahun' => $t->tahun]);
+            }
+            (empty($q_pangan)) ? $pangan['data'][] = 0 : $pangan['data'][] = $q_pangan->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_kimia = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '3', 'tahun' => $t->tahun]));
+            } else {
+                $q_kimia = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '3', 'tahun' => $t->tahun]);
+            }
+            (empty($q_kimia)) ? $kimia['data'][] = 0 : $kimia['data'][] = $q_kimia->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_kerajinan = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '4', 'tahun' => $t->tahun]));
+            } else {
+                $q_kerajinan = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '4', 'tahun' => $t->tahun]);
+            }
+            (empty($q_kerajinan)) ? $kerajinan['data'][] = 0 : $kerajinan['data'][] = $q_kerajinan->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_logam = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '5', 'tahun' => $t->tahun]));
+            } else {
+                $q_logam = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '5', 'tahun' => $t->tahun]);
+            }
+            (empty($q_logam)) ? $logam['data'][] = 0 : $logam['data'][] = $q_logam->nilai_investasi;
+        }
+        $series_industri = [$sandang, $pangan, $kimia, $kerajinan, $logam];
 
         $data = [
             'data' => $statistik_investasi,
@@ -135,10 +178,15 @@ class Frontend extends BaseController
             'series' => $series,
             'series_tk_unitusaha' => $series_tk_unitusaha,
             'series_tk_now' => $series_tk_now,
+            'series_industri' => $series_industri,
             'xaxis' => $xaxis,
             'count' => $this->crud_model->select_data('grafik_tahunan', 'getRow', false, null, ['tahun' => 'DESC']),
             'filter' => $this->request->getGet()
         ];
+
+        // echo json_encode($data['series_industri'], JSON_NUMERIC_CHECK);
+        // return false;
+        // dd($data);
         return view('frontend/statistik', $data);
     }
 
