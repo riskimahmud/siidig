@@ -172,4 +172,25 @@ class Validation
         'title' => ['label' => 'Title', 'rules' => 'required'],
         'body' => ['label' => 'Isi', 'rules' => 'required'],
     ];
+
+    public $halal = [
+        'nama_perusahaan' => ['label' => 'Nama Perusahaan', 'rules' => 'trim|required'],
+        'nama_pemilik' => ['label' => 'Nama Pemilik', 'rules' => 'trim|required'],
+        'nomor_sertifikat' => ['label' => 'Nomor Sertifikat', 'rules' => 'trim|required'],
+        'skala_usaha' => ['label' => 'Skala Usaha', 'rules' => 'trim|required'],
+        'alamat' => ['label' => 'Alamat', 'rules' => 'trim|required'],
+        'tahun' => ['label' => 'Tahun', 'rules' => 'trim|required|numeric|max_length[4]']
+    ];
+
+    public $kemasan = [
+        'nama_perusahaan' => ['label' => 'Nama Perusahaan', 'rules' => 'trim|required'],
+        'nama_pemilik' => ['label' => 'Nama Pemilik', 'rules' => 'trim|required'],
+        'alamat' => ['label' => 'Alamat', 'rules' => 'trim|required'],
+        'produk' => ['label' => 'Produk', 'rules' => 'trim|required'],
+        'no_telp' => ['label' => 'No Telp', 'rules' => 'trim|required'],
+        'ukuran' => ['label' => 'Ukuran', 'rules' => 'trim|required'],
+        'jenis_kemasan' => ['label' => 'Jenis Kemasan', 'rules' => 'trim|required'],
+        'tahun' => ['label' => 'Tahun', 'rules' => 'trim|required|numeric|max_length[4]'],
+        'kabkota' => ['label' => 'Kab / Kota', 'rules' => 'trim|required'],
+    ];
 }

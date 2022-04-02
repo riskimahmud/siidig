@@ -15,7 +15,7 @@
                     <li><a href="#home" class="menu-links">Home</a></li>
                     <li><a href="#stat" class="menu-links">Statistik</a></li>
                     <li><a href="#info" class="menu-links">Info</a></li>
-                    <li><a href="#about" class="menu-links">Tentang</a></li>
+                    <!-- <li><a href="#about" class="menu-links">Tentang</a></li> -->
                     <li><a href="#course" class="menu-links">Pelatihan</a></li>
                     <li><a href="#news" class="menu-links">Berita</a></li>
                     <li><a href="#contact" class="menu-links">Kontak</a></li>
@@ -36,7 +36,7 @@
                 <li><a href="#home" class="menu-links">Home</a></li>
                 <li><a href="#stat" class="menu-links">Statistik</a></li>
                 <li><a href="#info" class="menu-links">Info</a></li>
-                <li><a href="#about" class="menu-links">Tentang</a></li>
+                <!-- <li><a href="#about" class="menu-links">Tentang</a></li> -->
                 <li><a href="#course" class="menu-links">Pelatihan</a></li>
                 <li><a href="#news" class="menu-links">Berita</a></li>
                 <li><a href="#contact" class="menu-links">Kontak</a></li>
@@ -110,7 +110,7 @@
                     <div class="col-lg-9 v-center">
                         <div class="header-heading">
                             <h1 class="wow fadeInUp text-white" data-wow-delay=".2s">Selamat Datang</h1>
-                            <p class="wow fadeInUp text-white-50" data-wow-delay=".4s">Sistem Informasi Industri Gorontalo</p>
+                            <p class="wow fadeInUp text-white" data-wow-delay=".4s">Sistem Informasi Industri Gorontalo</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
             <div class="col-lg-12">
                 <div class="common-heading text-l">
                     <h2 class="mb30"><span class="text-second text-bold">Statistik</span> Industri Di Provinsi Gorontalo</h2>
-                    <p class="mt3"> <span class="text-bold">Lorem Ipsumis simply dummy text of the printing and typesetting industry. Simply dummy text of the printing and typesetting industry. </span></p>
+                    <!-- <p class="mt3"> <span class="text-bold">Lorem Ipsumis simply dummy text of the printing and typesetting industry. Simply dummy text of the printing and typesetting industry. </span></p> -->
                 </div>
             </div>
             <div class="col-lg-12">
@@ -214,7 +214,7 @@
                 <div class="wide-block service-img1" data-tilt data-tilt-max="2" data-tilt-speed="600">
                     <div class="block-space-">
                         <!-- <span>PPC</span> -->
-                        <h4>Syarat Kemasan</h4>
+                        <h4>Fasilitasi Kemasan</h4>
                         <a href="javascript:void(0)" class="informasi" data-slug="kemasan">Selengkapnya... <i class="fas fa-chevron-right fa-icon"></i></a>
                     </div>
                 </div>
@@ -257,7 +257,7 @@
 </section>
 <!--End Service-->
 
-<!--why choose-->
+<!--why choose
 <section class="why-choos-lg-nx pad-tb deep-dark bg-gradient10" id="about">
     <div class="container">
         <div class="row">
@@ -557,12 +557,12 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-8 text-center">
-                                <h3 class="mb10" id="modal-title">Popup Modal Form</h3>
+                                <h3 class="mb10" id="modal-title"></h3>
                             </div>
                         </div>
                         <div class="row justify-content-center mt30">
                             <div class="col-md-9" id="modal-body">
-                                <div class="form-block fdgn2 mt10 mb10">
+                                <!-- <div class="form-block fdgn2 mt10 mb10">
                                     <form action="#" method="post" name="feedback-form">
                                         <div class="fieldsets row">
                                             <div class="col-md-6"><input type="text" placeholder="Full Name" name="name"></div>
@@ -623,7 +623,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

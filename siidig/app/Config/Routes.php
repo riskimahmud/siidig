@@ -75,6 +75,20 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->post('siinas/ubah', 'Siinas::update');
     $routes->delete('siinas/(:num)', 'Siinas::hapus/$1');
 
+    $routes->get('fas-halal', 'Halal::index');
+    $routes->get('fas-halal/tambah', 'Halal::tambah');
+    $routes->post('fas-halal/tambah', 'Halal::store');
+    $routes->get('fas-halal/ubah/(:num)', 'Halal::ubah/$1');
+    $routes->post('fas-halal/ubah', 'Halal::update');
+    $routes->delete('fas-halal/(:num)', 'Halal::hapus/$1');
+
+    $routes->get('fas-kemasan', 'Kemasan::index');
+    $routes->get('fas-kemasan/tambah', 'Kemasan::tambah');
+    $routes->post('fas-kemasan/tambah', 'Kemasan::store');
+    $routes->get('fas-kemasan/ubah/(:num)', 'Kemasan::ubah/$1');
+    $routes->post('fas-kemasan/ubah', 'Kemasan::update');
+    $routes->delete('fas-kemasan/(:num)', 'Kemasan::hapus/$1');
+
     $routes->get('informasi', 'Informasi::index');
     $routes->get('informasi/ubah/(:num)', 'Informasi::ubah/$1');
     $routes->post('informasi/ubah', 'Informasi::update');
