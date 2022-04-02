@@ -360,7 +360,7 @@
                 <div class="common-heading ptag">
                     <span>Industri</span>
                     <h2>Industri Yang Kami Naungi</h2>
-                    <p>Successfully delivered digital products Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <!-- <p>Successfully delivered digital products Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
                 </div>
             </div>
         </div>
@@ -642,6 +642,8 @@
 <script>
     $(".informasi").on("click", function(e) {
         const slug = $(this).data('slug');
+        $("#modal-informasi").toggle('modal');
+        $("#modal-body").html("Sedang mengambil data <i class='fas fa-spinner fa-spin'></i>");
         // alert(slug);
         $.ajax({
             url: "<?= site_url('/get-informasi') ?>",
@@ -652,7 +654,6 @@
                 if (data.status === true) {
                     $("#modal-title").html(data.data.title);
                     $("#modal-body").html(data.data.body);
-                    $("#modal-informasi").toggle('modal');
                 }
                 // console.log(data);
             }
