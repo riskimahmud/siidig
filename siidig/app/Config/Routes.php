@@ -153,6 +153,8 @@ $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
 
     // download template investasi
     $routes->post('download-template-investasi', 'LaporanInvestasi::download_template');
+
+    $routes->post('getKelurahan', 'LaporanInvestasi::get_kelurahan');
 });
 
 /*

@@ -25,7 +25,7 @@
                                 <select name="industri" id="industri" class="form-control form-control-sm col-sm-8">
                                     <option value="">Semua</option>
                                     <?php foreach ($industri as $in) : ?>
-                                        <option value="<?= $in['id'] ?>" <?= ($in['id'] == $industri_option) ? 'selected' : ''; ?>>
+                                        <option value="<?= $in['id'] ?>" <?= (isset($filter['industri']) && ($in['id'] == $filter['industri'])) ? 'selected' : ''; ?>>
                                             <?= $in['nama_industri'] ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -38,9 +38,65 @@
                                 <label for="tahun" class="col-sm-4 col-form-label text-left text-md-right">Tahun </label>
                                 <select name="tahun" id="tahun" class="form-control form-control-sm col-sm-8">
                                     <?php for ($i = date("Y"); $i >= 2016; $i--) : ?>
-                                        <option value="<?= $i ?>" <?= ($i == $tahun) ? 'selected' : ''; ?>><?= $i ?></option>
+                                        <option value="<?= $i ?>" <?= ($i == $filter['tahun']) ? 'selected' : ''; ?>><?= $i ?></option>
                                     <?php endfor ?>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-0">
+                            <div class="form-group row">
+                                <label for="kecamatan" class="col-sm-4 col-form-label text-left text-md-right">Kecamatan </label>
+                                <select name="kecamatan" id="kecamatan" class="form-control form-control-sm col-sm-8">
+                                    <option value="">Semua</option>
+                                    <?php foreach ($kecamatan as $kec) : ?>
+                                        <option value="<?= $kec['nama_kelkec'] ?>" <?= (isset($filter['kecamatan']) && ($kec['nama_kelkec'] == $filter['kecamatan'])) ? 'selected' : ''; ?>>
+                                            <?= $kec['nama_kelkec'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-0">
+                            <div class="form-group row">
+                                <label for="kelurahan" class="col-sm-4 col-form-label text-left text-md-right">Kelurahan </label>
+                                <select name="kelurahan" id="kelurahan" class="form-control form-control-sm col-sm-8">
+                                    <option value="">Semua</option>
+                                    <?php foreach ($kelurahan as $kec) : ?>
+                                        <option value="<?= $kec['nama_kelkec'] ?>" <?= (isset($filter['kelurahan']) && ($kec['nama_kelkec'] == $filter['kelurahan'])) ? 'selected' : ''; ?>>
+                                            <?= $kec['nama_kelkec'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-0">
+                            <div class="form-group row">
+                                <label for="bentuk_badan_usaha" class="col-sm-6 col-form-label text-left text-md-right">Badan Usaha</label>
+                                <select name="bentuk_badan_usaha" id="bentuk_badan_usaha" class="form-control form-control-sm col-sm-6">
+                                    <option value="">Semua</option>
+                                    <?php foreach ($badan_usaha as $bu) : ?>
+                                        <option value="<?= $bu ?>" <?= (isset($filter['bentuk_badan_usaha']) && ($bu == $filter['bentuk_badan_usaha'])) ? 'selected' : ''; ?>>
+                                            <?= $bu ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-0">
+                            <div class="form-group row">
+                                <label for="komoditi" class="col-sm-4 col-form-label text-left text-md-right">Komoditi</label>
+                                <input name="komoditi" id="komoditi" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['komoditi'])) ? $filter['komoditi'] : ''; ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 mb-0">
+                            <div class="form-group row">
+                                <label for="produk" class="col-sm-4 col-form-label text-left text-md-right">Produk</label>
+                                <input name="produk" id="produk" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['produk'])) ? $filter['produk'] : ''; ?>">
                             </div>
                         </div>
 
@@ -104,6 +160,27 @@
 
 <?= $this->section('script') ?>
 <script>
+    $("#kecamatan").on("change", function(e) {
+        const kec = $(this).val();
+        $("#kelurahan").html(`<option value="">Semua</option>`);
+        $.ajax({
+            url: url + '/getKelurahan',
+            data: {
+                kec: kec
+            },
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(response) {
+                let option = `<option value="">Semua</option>`;
+                response.data.forEach(e => {
+                    option += `<option value="${e.nama_kelkec}">${e.nama_kelkec}</option>`
+                });
+                $("#kelurahan").html(option);
+                // console.log(response)
+            }
+        })
+    })
+
     $('form button.deleteSemua').on("click", function(e) {
         e.preventDefault();
         const form = $(this).parents('form');

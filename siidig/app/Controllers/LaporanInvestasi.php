@@ -28,8 +28,13 @@ class LaporanInvestasi extends BaseController
         $data['title'] = "Daftar Investasi";
 
         $tahun = $this->request->getGet('tahun') ? $this->request->getGet('tahun') : date("Y");
-        // dd($this->investasi);
-        $where = [];
+        $filter = [
+            'tahun' => $tahun
+        ];
+        $where = [
+            'tahun' => $tahun
+        ];
+        $like = [];
         if (user("level") == "user") {
             $where['user_id'] = user("user_id");
         }
@@ -37,13 +42,48 @@ class LaporanInvestasi extends BaseController
         $industri = $this->request->getGet('industri');
         if ($industri != "") {
             $where['industri_id'] = $industri;
+            $filter['industri'] = $industri;
+        }
+
+        $kecamatan = $this->request->getGet('kecamatan');
+        if ($kecamatan != "") {
+            $where['kecamatan'] = $kecamatan;
+            $filter['kecamatan'] = $kecamatan;
+        }
+
+        $kelurahan = $this->request->getGet('kelurahan');
+        if ($kelurahan != "") {
+            $where['keldesa'] = $kelurahan;
+            $filter['kelurahan'] = $kelurahan;
+        }
+
+        $bentuk_badan_usaha = $this->request->getGet('bentuk_badan_usaha');
+        if ($bentuk_badan_usaha != "") {
+            $where['bentuk_badan_usaha'] = $bentuk_badan_usaha;
+            $filter['bentuk_badan_usaha'] = $bentuk_badan_usaha;
+        }
+
+        $komoditi = $this->request->getGet('komoditi');
+        if ($komoditi != "") {
+            $like['komoditi'] = $komoditi;
+            $filter['komoditi'] = $komoditi;
+        }
+
+        $produk = $this->request->getGet('produk');
+        if ($produk != "") {
+            $like['produk'] = $produk;
+            $filter['produk'] = $produk;
         }
 
         $data['tahun'] = $tahun;
         $data['industri_option'] = $industri;
-        $data['data'] = $this->investasi->where(array_merge($where, ['tahun' => $tahun]))->findAll();
+        $data['filter'] = $filter;
+        $data['data'] = $this->investasi->where($where)->like($like)->findAll();
         $data['base'] = $this->base;
         $data['industri'] = $this->industri->findAll();
+        $data['kecamatan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
+        $data['kelurahan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent <>' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
+        $data['badan_usaha'] = ['Koperasi', 'Perjan', 'Perum', 'Persero', 'CV', 'PO', 'PT'];
         return view('backend/' . $this->folder . '/index', $data);
     }
 
@@ -260,5 +300,16 @@ class LaporanInvestasi extends BaseController
     // hapus semua dalam daftar
     public function hapus_semua()
     {
+    }
+
+    public function get_kelurahan()
+    {
+        $kec = $this->request->getPost('kec');
+        $kel = $this->kelkec->where(['parent' => $kec])->findAll();
+        $data = [
+            'data' => $kel
+        ];
+
+        return $this->response->setJSON($data);
     }
 }
