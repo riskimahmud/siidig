@@ -1,6 +1,6 @@
 <?= $this->include('layout/backend/head_html'); ?>
 
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
 
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">

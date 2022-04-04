@@ -48,9 +48,9 @@
                                 <th>No.</th>
                                 <th>Nama Perusahaan</th>
                                 <th>Nama Pemilik</th>
-                                <th>Produk</th>
-                                <th>Ukuran</th>
-                                <th>Jenis Kemasan</th>
+                                <th>Nomor Sertifikat</th>
+                                <th>Skala Usaha</th>
+                                <th>Alamat</th>
                                 <th>Tahun</th>
                             </tr>
                         </thead>

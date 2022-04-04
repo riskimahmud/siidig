@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="row">
     <div class="col-md-5">
-        <div class="bg-white p-2 m-2 shadow rounded text-justify">
+        <div class="bg-white p-4 m-2 shadow rounded text-justify">
             <p class="">
             <ol class="pl-4">
                 <li>
