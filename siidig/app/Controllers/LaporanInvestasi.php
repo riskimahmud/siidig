@@ -27,16 +27,23 @@ class LaporanInvestasi extends BaseController
     {
         $data['title'] = "Daftar Investasi";
 
-        $tahun = $this->request->getVar('tahun') ? $this->request->getVar('tahun') : date("Y");
+        $tahun = $this->request->getGet('tahun') ? $this->request->getGet('tahun') : date("Y");
         // dd($this->investasi);
-        $user = [];
+        $where = [];
         if (user("level") == "user") {
-            $user = ['user_id' => user("user_id")];
+            $where['user_id'] = user("user_id");
+        }
+
+        $industri = $this->request->getGet('industri');
+        if ($industri != "") {
+            $where['industri_id'] = $industri;
         }
 
         $data['tahun'] = $tahun;
-        $data['data'] = $this->investasi->where(array_merge($user, ['tahun' => $tahun]))->findAll();
+        $data['industri_option'] = $industri;
+        $data['data'] = $this->investasi->where(array_merge($where, ['tahun' => $tahun]))->findAll();
         $data['base'] = $this->base;
+        $data['industri'] = $this->industri->findAll();
         return view('backend/' . $this->folder . '/index', $data);
     }
 
@@ -47,7 +54,7 @@ class LaporanInvestasi extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Akses ditolak', 0);
         }
 
-        $investasi = $this->investasi->find($id);
+        $investasi = $this->investasi->join('industri', 'industri.id = investasi.industri_id')->find($id);
         if (empty($investasi)) {
             return redirect()->to("/investasi");
         }
@@ -248,5 +255,10 @@ class LaporanInvestasi extends BaseController
     public function download_template()
     {
         return $this->response->download('uploads/template-investasi.xlsx', null)->setFileName('FORMAT.xlsx');
+    }
+
+    // hapus semua dalam daftar
+    public function hapus_semua()
+    {
     }
 }

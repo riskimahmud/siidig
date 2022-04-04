@@ -38,6 +38,8 @@ $routes->get('/course/(:any)', 'Frontend::pelatihan/$1');
 $routes->get('/berita', 'Frontend::berita');
 $routes->get('/berita/(:any)', 'Frontend::berita/$1');
 $routes->get('/get-informasi', 'Informasi::get_info');
+$routes->get('/info-halal', 'Frontend::halal');
+$routes->get('/info-kemasan', 'Frontend::kemasan');
 $routes->post('/kontak', 'Frontend::kontak');
 $routes->post('/login', 'Login::do_login');
 $routes->get('/logout', 'Login::logout');
@@ -143,6 +145,9 @@ $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     $routes->get('investasi/hapus/(:num)', 'LaporanInvestasi::hapus/$1');
     $routes->get('investasi/import', 'LaporanInvestasi::import');
     $routes->post('investasi/import', 'LaporanInvestasi::do_import');
+
+    // hapus investasi berdasarkan tabel
+    $routes->post('hapus-investasi', 'LaporanInvestasi::hapus_semua');
 
     $routes->add('investasi/(:num)', 'LaporanInvestasi::detail/$1');
 

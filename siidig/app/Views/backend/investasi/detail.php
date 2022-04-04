@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nama Pemilik</label>
                                 <span><?= $data['nama_pemilik'] ?></span>
@@ -29,6 +29,10 @@
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nama Perusahaan / IKM</label>
                                 <span><?= $data['nama_ikm'] ?></span>
+                            </div>
+                            <div class="d-flex justify-content-between border-bottom mb-2">
+                                <label>Industri</label>
+                                <span><?= $data['nama_industri'] ?></span>
                             </div>
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Alamat</label>
@@ -79,7 +83,7 @@
                                 <span><?= $data['tkp'] ?></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nilai Investasi</label>
                                 <span><?= angkaInvestasi($data['nilai_investasi']) ?></span>
