@@ -9,10 +9,10 @@
             </div>
             <div class="custom-nav" role="navigation">
                 <ul class="nav-list">
-                    <li><a href="/" class="menu-links">Home</a></li>
-                    <li><a href="/statistik" class="menu-links">Statistik</a></li>
+                    <li><a href="/" class="menu-links">Beranda</a></li>
+                    <!-- <li><a href="/statistik" class="menu-links">Statistik</a></li> -->
                     <li><a href="/course" class="menu-links">Pelatihan</a></li>
-                    <li><a href="/berita" class="menu-links">Berita</a></li>
+                    <!-- <li><a href="/berita" class="menu-links">Berita</a></li> -->
                 </ul>
             </div>
             <!-- <div class="custom-nav" role="navigation">
@@ -26,10 +26,10 @@
         <!--Mobile Menu-->
         <nav id="main-nav">
             <ul class="first-nav">
-                <li><a href="/">Home</a> </li>
-                <li><a href="/Statistik">Statistik</a> </li>
+                <li><a href="/">Beranda</a> </li>
+                <!-- <li><a href="/Statistik">Statistik</a> </li> -->
                 <li><a href="/course">Pelatihan</a> </li>
-                <li><a href="/berita">Berita</a> </li>
+                <!-- <li><a href="/berita">Berita</a> </li> -->
             </ul>
         </nav>
     </div>

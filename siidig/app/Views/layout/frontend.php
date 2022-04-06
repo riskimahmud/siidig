@@ -20,6 +20,7 @@
     <link href="/assets_front/css/style.css" rel="stylesheet">
     <link href="/assets_front/css/responsive.css" rel="stylesheet">
     <link href="/assets_front/css/darkmode.css" rel="stylesheet">
+    <link href="/assets_front/css/custom.css" rel="stylesheet">
 
     <?= $this->renderSection('css') ?>
     <style>
@@ -48,7 +49,8 @@
                 <div class="col-lg-6 col-sm-12 pt40">
                     <div class="footerdez-a">
                         <h2 class="h4">DINAS KOPERASI UMKM PERINDUSTRIAN DAN PERDAGANGAN PROVINSI GORONTALO</h2>
-                        <p class="mt10">Feel free to reach out if you want to collaborate with us, or simply have a call.</p>
+                        <p class="mt10">Jalan Tengan Desa Toto Selatan
+                            Kabupaten Bone Bolango</p>
                     </div>
                 </div>
 

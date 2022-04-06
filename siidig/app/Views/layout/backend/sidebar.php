@@ -86,6 +86,35 @@
           </li>
           <li class="nav-header pt-1">Informasi</li>
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Perusahaan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url("siinas"); ?>" class="nav-link">
+                  <i class="far fa-angle-right nav-icon"></i>
+                  <p>SIINAS</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url("fas-halal"); ?>" class="nav-link">
+                  <i class="far fa-angle-right nav-icon"></i>
+                  <p>Fasilitasi Halal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url("fas-kemasan"); ?>" class="nav-link">
+                  <i class="far fa-angle-right nav-icon"></i>
+                  <p>Fasilitasi Kemasan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url("informasi"); ?>" class="nav-link">
               <i class="nav-icon fas fa-info-circle fa-fw"></i>
               <p>
@@ -140,14 +169,14 @@
 
         <?php if (user("level") == "admin") : ?>
           <li class="nav-header pt-1">UTAMA</li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url("siinas"); ?>" class="nav-link">
               <i class="nav-icon fas fa-building fa-fw"></i>
               <p>
                 Perusahaan SIINAS
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="<?= base_url("laporan"); ?>" class="nav-link">
               <i class="nav-icon fas fa-briefcase fa-fw"></i>
