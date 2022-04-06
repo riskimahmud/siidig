@@ -49,7 +49,7 @@
 <!--Start Hero-->
 <?php if ($header) : ?>
     <section class="hero-slider hero-style position-relative" id="home">
-        <a href="#stat" class="btn lnk wow fadeInUp position-absolute" style="z-index: 10000; margin: auto; left: 44.5%; bottom: 20px;" data-wow-delay=".6s"><i class="fas fa-chevron-down fa-down text-white fa-2x"></i></a>
+        <a href="#stat" class="btn lnk wow fadeInUp position-absolute" style="z-index: 10000; margin: auto; left: 45%; bottom: 20px;" data-wow-delay=".6s"><i class="fas fa-chevron-down fa-down text-white fa-2x"></i></a>
         <div class="swiper-container">
             <!-- start swiper-wrapper -->
             <div class="swiper-wrapper">

@@ -21,6 +21,12 @@ class Admin extends BaseController
 
     public function laporan_investasi()
     {
+        $cetak = $this->request->getGet('cetak');
+        if ($cetak) {
+            echo "ini";
+            return;
+        }
+
         $data['title'] = "Daftar Investasi";
 
         $where = [];
@@ -55,5 +61,10 @@ class Admin extends BaseController
 
         // dd($data);
         return view('backend/laporan/detail', $data);
+    }
+
+    public function cetak_investasi()
+    {
+        dd($this->request->getVar());
     }
 }

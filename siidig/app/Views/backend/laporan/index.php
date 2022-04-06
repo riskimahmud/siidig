@@ -34,12 +34,20 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1">
                         <label for="">&nbsp;</label>
                         <button type="submit" class="btn btn-primary d-block"><i class="fas fa-filter fa-fw"></i> Sortir</button>
                     </div>
+                    <?= form_close(); ?>
+                    <div class="col-md-1">
+                        <?= form_open('', ['autocomplete' => 'off', 'target' => '_blank']); ?>
+                        <input type="hidden" name="kabkota" id="kabkota_cetak">
+                        <input type="hidden" name="tahun" id="tahun_cetak">
+                        <label for="">&nbsp;</label>
+                        <button target="_blank" type="submit" name="cetak" value="cetak" class="btn btn-success d-block"><i class="fas fa-print fa-fw"></i> Cetak</button>
+                        <?= form_close(); ?>
+                    </div>
                 </div>
-                <?= form_close(); ?>
             </div>
         </div>
 
@@ -89,4 +97,14 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('script'); ?>
+<script>
+    $("#kabkota").on("change", function(e) {
+        const val = $(this).val();
+        $("#kabkota_cetak").val(val);
+    })
+    $("#tahun").on("change", function(e) {
+        const val = $(this).val();
+        $("#tahun_cetak").val(val);
+    })
+</script>
 <?= $this->endSection(); ?>
