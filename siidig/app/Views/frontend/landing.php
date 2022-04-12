@@ -31,7 +31,7 @@
         </div>
     </main>
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="assets_front/vegas/vegas.min.js"></script>
     <script>
         $("#example, body").vegas({
