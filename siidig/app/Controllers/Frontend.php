@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\HalalModel;
 use App\Models\KabkotaModel;
 use App\Models\KemasanModel;
+use App\Models\SiinasModel;
 
 class Frontend extends BaseController
 {
@@ -19,6 +20,14 @@ class Frontend extends BaseController
         $this->kabkota = new KabkotaModel();
     }
 
+    public function landing()
+    {
+        $data = [
+            'title' => 'Statistik Industri Provinsi Gorontalo'
+        ];
+        return view('frontend/landing', $data);
+    }
+
     public function index()
     {
         // $data = [
@@ -29,12 +38,13 @@ class Frontend extends BaseController
         //     'count' => $this->crud_model->select_data('grafik_tahunan', 'getRow', false, null, ['tahun' => 'DESC'])
         // ];
         $where = [];
+        $title_chart_next = '';
         // d($this->request->getGet());
         $kabkota = $this->request->getGet('kabkota');
         if ($kabkota != "") {
             $where['id'] = $kabkota;
             $kabkota = $this->kabkota->find($kabkota);
-            $title_chart_next = ' di ' . ucwords(strtolower($kabkota['nama_kabkota']));
+            $title_chart_next .= ' di ' . ucwords(strtolower($kabkota['nama_kabkota']));
         }
 
         $dari_tahun = $this->request->getGet('dari_tahun');
@@ -128,6 +138,97 @@ class Frontend extends BaseController
         ];
         // dd($statistik_tk_now);
 
+        $sandang = ['name' => 'SANDANG'];
+        $pangan = ['name' => 'PANGAN'];
+        $kimia = ['name' => 'KIMIA & BAHAN BANGUNAN'];
+        $kerajinan = ['name' => 'KERAJINAN'];
+        $logam = ['name' => 'INDUSTRI LOGAM & ELEKTRONIK'];
+        $xaxis_industri = [];
+
+        $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+        // $industri = $this->crud_model->select_custom("select * from industri");
+        foreach ($tahun as $t) {
+            $xaxis_industri[] = $t->tahun;
+            if ($kabkota != "") {
+                $q_sandang = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '1', 'tahun' => $t->tahun]));
+            } else {
+                $q_sandang = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '1', 'tahun' => $t->tahun]);
+            }
+            (empty($q_sandang)) ? $sandang['data'][] = 0 : $sandang['data'][] = $q_sandang->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_pangan = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '2', 'tahun' => $t->tahun]));
+            } else {
+                $q_pangan = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '2', 'tahun' => $t->tahun]);
+            }
+            (empty($q_pangan)) ? $pangan['data'][] = 0 : $pangan['data'][] = $q_pangan->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_kimia = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '3', 'tahun' => $t->tahun]));
+            } else {
+                $q_kimia = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '3', 'tahun' => $t->tahun]);
+            }
+            (empty($q_kimia)) ? $kimia['data'][] = 0 : $kimia['data'][] = $q_kimia->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_kerajinan = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '4', 'tahun' => $t->tahun]));
+            } else {
+                $q_kerajinan = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '4', 'tahun' => $t->tahun]);
+            }
+            (empty($q_kerajinan)) ? $kerajinan['data'][] = 0 : $kerajinan['data'][] = $q_kerajinan->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_logam = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '5', 'tahun' => $t->tahun]));
+            } else {
+                $q_logam = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '5', 'tahun' => $t->tahun]);
+            }
+            (empty($q_logam)) ? $logam['data'][] = 0 : $logam['data'][] = $q_logam->nilai_investasi;
+        }
+        $series_industri = [$sandang, $pangan, $kimia, $kerajinan, $logam];
+
+        // untuk tabel
+        $kabupaten_kota = $this->kabkota->findAll();
+        // $tabel_unit_usaha = [
+        //     ['Kota Gorontalo', 3132, 2926, 3448, 3515, 3549],
+        //     ['Kab. Gorontalo', 3295, 3442, 3558, 3928, 4144],
+        // ];
+        // dd($kabupaten_kota);
+        $tabel_unit_usaha = [];
+        $tabel_tk = [];
+        $tabel_tk_gender = [];
+        $tabel_investasi = [];
+        $tabel_produksi = [];
+        foreach ($kabupaten_kota as $kk) {
+            $tabel_unit_usaha[$kk['nama_kabkota']] = [];
+            $tabel_tk[$kk['nama_kabkota']] = [];
+            $tabel_tk_gender[$kk['nama_kabkota']] = [];
+            $tabel_investasi[$kk['nama_kabkota']] = [];
+            $tabel_produksi[$kk['nama_kabkota']] = [];
+        }
+        foreach ($tahun as $t) {
+            foreach ($kabupaten_kota as $kk) {
+                // echo $t->tahun . " - " . $kk['nama_kabkota'] . "<br>";
+                $data = $this->crud_model->select_data('grafik_kabkota_tahunan', 'getRow', ['tahun' => $t->tahun, 'id' => $kk['id']]);
+                if (empty($data)) {
+                    $tabel_unit_usaha[$kk['nama_kabkota']][] = 0;
+                    $tabel_tk[$kk['nama_kabkota']][] = 0;
+                    $tabel_tk_gender[$kk['nama_kabkota']][] = 0;
+                    $tabel_tk_gender[$kk['nama_kabkota']][] = 0;
+                    $tabel_investasi[$kk['nama_kabkota']][] = 0;
+                    $tabel_produksi[$kk['nama_kabkota']][] = 0;
+                } else {
+                    $tabel_unit_usaha[$kk['nama_kabkota']][] = $data->unit_usaha;
+                    $tabel_tk[$kk['nama_kabkota']][] = $data->tenaga_kerja;
+                    $tabel_tk_gender[$kk['nama_kabkota']][] = $data->tenaga_kerja_laki;
+                    $tabel_tk_gender[$kk['nama_kabkota']][] = $data->tenaga_kerja_perempuan;
+                    $tabel_investasi[$kk['nama_kabkota']][] = $data->nilai_investasi;
+                    $tabel_produksi[$kk['nama_kabkota']][] = $data->nilai_produksi;
+                }
+            }
+        }
+        // d($tahun);
+        // return false;
+
         $data = [
             'data' => $statistik_investasi,
             'title_chart' => $title_chart,
@@ -137,13 +238,21 @@ class Frontend extends BaseController
             'series_tk_unitusaha' => $series_tk_unitusaha,
             'series_tk_now' => $series_tk_now,
             'xaxis' => $xaxis,
+            'series_industri' => $series_industri,
             'count' => $this->crud_model->select_data('grafik_tahunan', 'getRow', false, null, ['tahun' => 'DESC']),
-            'filter' => $this->request->getGet()
+            'filter' => $this->request->getGet(),
+
+            'tahun_tabel' => $tahun,
+            'tabel_unit_usaha' => $tabel_unit_usaha,
+            'tabel_tk' => $tabel_tk,
+            'tabel_tk_gender' => $tabel_tk_gender,
+            'tabel_investasi' => $tabel_investasi,
+            'tabel_produksi' => $tabel_produksi,
         ];
         return view('frontend/home', $data);
     }
 
-    public function statistik()
+    public function statistik_lama()
     {
         $where = [];
         // d($this->request->getGet());
@@ -402,5 +511,15 @@ class Frontend extends BaseController
             'data' => $this->kemasan->findAll()
         ];
         return view('frontend/kemasan', $data);
+    }
+
+    public function siinas()
+    {
+        $siinas = new SiinasModel();
+        $data = [
+            'title' => 'Perusahaan Yang Terdaftar di SIINAS',
+            'data' => $siinas->findAll()
+        ];
+        return view('frontend/siinas', $data);
     }
 }

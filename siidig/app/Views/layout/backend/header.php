@@ -12,14 +12,14 @@
 
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item dropdown">
+    <!-- <li class="nav-item dropdown">
       <a class="nav-link" href="/kontak" title="Pesan Masuk">
         <i class="far fa-bell fa-lg"></i>
         <?php if (getKontak() > 0) { ?>
           <span class="badge badge-danger navbar-badge"><?= getKontak() ?></span>
         <?php } ?>
       </a>
-    </li>
+    </li> -->
     <li class="nav-item dropdown user-menu">
       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
         <img src="<?= base_url("avatar/default.png"); ?>" class="user-image img-circle" alt="User Image">

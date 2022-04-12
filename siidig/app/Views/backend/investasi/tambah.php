@@ -11,23 +11,33 @@
                 </div>
                 <!-- form start -->
                 <?= form_open($base . "/tambah", ["class" => "form form-horizontal", "autocomplete" => ""]); ?>
-                <?= form_hidden('tahun', date("Y")); ?>
                 <?= form_hidden('user_id', user("user_id")); ?>
                 <?= form_hidden('kabkota_id', user("kabkota_id")); ?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="industri_id">Jenis Industri</label>
-                                <select name="industri_id" id="industri_id" class="form-control <?= ($validation->hasError('industri_id')) ? 'is-invalid' : ''; ?>" autofocus>
-                                    <option value="">Pilih</option>
-                                    <?php
-                                    foreach ($industri as $in) :
-                                    ?>
-                                        <option value="<?= $in['id']; ?>" <?= set_select('industri_id', $in['id']); ?>><?= $in['nama_industri']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-feedback"><?= $validation->getError('industri_id'); ?></div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="industri_id">Jenis Industri</label>
+                                        <select name="industri_id" id="industri_id" class="form-control <?= ($validation->hasError('industri_id')) ? 'is-invalid' : ''; ?>" autofocus>
+                                            <option value="">Pilih</option>
+                                            <?php
+                                            foreach ($industri as $in) :
+                                            ?>
+                                                <option value="<?= $in['id']; ?>" <?= set_select('industri_id', $in['id']); ?>><?= $in['nama_industri']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <div class="invalid-feedback"><?= $validation->getError('industri_id'); ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tahun">Tahun</label>
+                                        <input type="text" class="form-control <?= ($validation->hasError('tahun')) ? 'is-invalid' : '' ?>" name="tahun" id="tahun" value="<?= old('tahun', date("Y")); ?>" placeholder="Tahun">
+                                        <div class="invalid-feedback"><?= $validation->getError('tahun') ?></div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="nama_pemilik">Nama Pemilik</label>

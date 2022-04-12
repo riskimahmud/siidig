@@ -114,7 +114,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url("informasi"); ?>" class="nav-link">
               <i class="nav-icon fas fa-info-circle fa-fw"></i>
               <p>
@@ -137,7 +137,7 @@
                 Berita
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="<?= base_url("pelatihan"); ?>" class="nav-link">
               <i class="nav-icon fas fa-user-graduate fa-fw"></i>
@@ -146,14 +146,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="<?= base_url("aplikasi"); ?>" class="nav-link">
               <i class="nav-icon fas fa-globe fa-fw"></i>
               <p>
                 Aplikasi
               </p>
             </a>
-          </li>
+          </li> -->
         <?php } else if (user("level") == "operator") { // operator
         ?>
           <!-- <li class="nav-item">

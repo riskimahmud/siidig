@@ -15,9 +15,9 @@
                 </div>
                 <div class="card-header pb-0">
 
-                    <?= form_open('/investasi', ['autocomplete' => 'off', 'method' => 'get', 'class' => 'form-horizontal']); ?>
+                    <?= form_open('/investasi', ['autocomplete' => 'off', 'method' => 'get', 'class' => 'form-horizontal', 'id' => 'form-investasi']); ?>
                     <div class="row">
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="industri" class="col-sm-4 col-form-label text-left text-md-right">
                                     Industri
@@ -33,7 +33,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="tahun" class="col-sm-4 col-form-label text-left text-md-right">Tahun </label>
                                 <select name="tahun" id="tahun" class="form-control form-control-sm col-sm-8">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="kecamatan" class="col-sm-4 col-form-label text-left text-md-right">Kecamatan </label>
                                 <select name="kecamatan" id="kecamatan" class="form-control form-control-sm col-sm-8">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="kelurahan" class="col-sm-4 col-form-label text-left text-md-right">Kelurahan </label>
                                 <select name="kelurahan" id="kelurahan" class="form-control form-control-sm col-sm-8">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="bentuk_badan_usaha" class="col-sm-6 col-form-label text-left text-md-right">Badan Usaha</label>
                                 <select name="bentuk_badan_usaha" id="bentuk_badan_usaha" class="form-control form-control-sm col-sm-6">
@@ -86,25 +86,26 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="komoditi" class="col-sm-4 col-form-label text-left text-md-right">Komoditi</label>
                                 <input name="komoditi" id="komoditi" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['komoditi'])) ? $filter['komoditi'] : ''; ?>">
                             </div>
                         </div>
 
-                        <div class="col-sm-3 mb-0">
+                        <div class="col-sm-6 col-md-3 mb-0">
                             <div class="form-group row">
                                 <label for="produk" class="col-sm-4 col-form-label text-left text-md-right">Produk</label>
                                 <input name="produk" id="produk" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['produk'])) ? $filter['produk'] : ''; ?>">
                             </div>
                         </div>
 
-                        <div class="col-sm-12 col-md-2">
-                            <button type="submit" class="btn btn-info btn-sm btn-block"><i class="fas fa-search fa-fw fa-sm"></i> Cari</button>
+                        <div class="col-sm-6 col-md-3 text-right">
+                            <button type="submit" name="cari" value="cari" class="btn btn-info btn-sm"><i class="fas fa-search fa-fw fa-sm"></i> Cari</button>
+                            <button type="submit" name="cetak" value="cetak" id="cetak" class="btn btn-success btn-sm"><i class="fas fa-print fa-fw fa-sm"></i> Cetak</button>
                         </div>
                         <?= form_close(); ?>
-                        <div class="col-sm-12 col-md-2">
+                        <div class="col-sm-6 col-md-3">
                             <?= form_open('/hapus-investasi', ['autocomplete' => 'off']); ?>
                             <input type="hidden" name="industri" id="industri_hapus">
                             <input type="hidden" name="tahun" id="tahun_hapus">

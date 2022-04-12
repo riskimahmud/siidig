@@ -171,3 +171,10 @@ function getKontak()
     $builder->where('status', '0');
     return $builder->countAllResults();
 }
+
+function getAplikasi()
+{
+    $db = \Config\Database::connect();
+    $builder = $db->table('aplikasi')->get()->getResultArray();
+    return $builder;
+}

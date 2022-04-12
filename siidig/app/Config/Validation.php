@@ -81,6 +81,7 @@ class Validation
 
     public $investasi_user = [
         'industri_id' => ['label' => 'Industri', 'rules' => 'trim|required'],
+        'tahun' => ['label' => 'Tahun', 'rules' => 'trim|required|numeric|min_length[4]|max_length[4]'],
         'nama_pemilik' => ['label' => 'Nama Pemilik', 'rules' => 'trim|required'],
         'nama_ikm' => ['label' => 'Nama Perusahaan', 'rules' => 'trim|required'],
         'alamat' => ['label' => 'Alamat', 'rules' => 'trim|required'],
@@ -94,7 +95,7 @@ class Validation
         'kbli' => ['label' => 'KBLI', 'rules' => 'trim'],
         'tkl' => ['label' => 'TK Laki-laki', 'rules' => 'trim|required|numeric'],
         'tkp' => ['label' => 'TK Perempuan', 'rules' => 'trim|required|numeric'],
-        'nilai_investasi' => ['label' => 'Nilai Investasi', 'rules' => 'trim|required|integer'],
+        'nilai_investasi' => ['label' => 'Nilai Investasi', 'rules' => 'trim|required|integer|less_than[10000000]'],
         'jumlah_produksi' => ['label' => 'Jumlah Produksi', 'rules' => 'trim|required|integer'],
         'satuan' => ['label' => 'Satuan', 'rules' => 'trim|required'],
         'nilai_produksi' => ['label' => 'Nilai Produksi', 'rules' => 'trim|required|integer'],

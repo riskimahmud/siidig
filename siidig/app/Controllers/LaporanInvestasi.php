@@ -6,6 +6,7 @@ use App\Models\IndustriModel;
 use App\Models\InvestasiModel;
 use App\Models\KelKecModel;
 use CodeIgniter\Controller;
+use PhpParser\Node\Stmt\Continue_;
 
 class LaporanInvestasi extends BaseController
 {
@@ -73,6 +74,20 @@ class LaporanInvestasi extends BaseController
         if ($produk != "") {
             $like['produk'] = $produk;
             $filter['produk'] = $produk;
+        }
+
+        $cetak = $this->request->getGet('cetak');
+        if ($cetak != "") {
+            $data_investasi = $this->investasi->where($where)->like($like)->findAll();
+            // dd($data_investasi);
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('uploads/template-cetak-investasi.xlsx');
+            $worksheet = $spreadsheet->getActiveSheet();
+
+            $worksheet->getCell('A1')->setValue('Judul Laporan');
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('write.xlsx');
+
+            return false;
         }
 
         $data['tahun'] = $tahun;
@@ -248,6 +263,9 @@ class LaporanInvestasi extends BaseController
         // echo $worksheet->getCellByColumnAndRow(2, 2)->getValue();
         $data_import = [];
         for ($row = 3; $row <= $highestRow; ++$row) {
+            if ($worksheet->getCellByColumnAndRow(17, $row)->getValue() >= "10000000") {
+                continue;
+            }
             $baris = [
                 'nama_ikm' => $worksheet->getCellByColumnAndRow(2, $row)->getValue(),
                 'nama' => $worksheet->getCellByColumnAndRow(3, $row)->getValue(),

@@ -3,10 +3,10 @@
 <body class="hold-transition layout-top-nav layout-navbar-fixed">
     <div class="wrapper">
 
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+        <nav class="main-header navbar navbar-expand-md navbar-dark navbar-purple">
             <div class="container">
                 <a href="/" class="navbar-brand">
-                    <img src="/assets/img/logo-small.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+                    <img src="/assets/img/logo-white.png" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
                     <!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
                 </a>
 
@@ -18,7 +18,7 @@
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="/" class="nav-link">Beranda</a>
+                            <a href="/home" class="nav-link">Beranda</a>
                         </li>
                         <li class="nav-item">
                             <a href="/course" class="nav-link">Pelatihan</a>
@@ -28,6 +28,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="/info-kemasan" class="nav-link">Fasilitasi Kemasan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/info-siinas" class="nav-link">SIINAS</a>
                         </li>
                         <!-- <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Informasi</a>
@@ -54,7 +57,7 @@
         </nav>
         <!-- /.navbar -->
 
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-light">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container">
@@ -78,6 +81,31 @@
                 <div class="container">
                     <?= $this->renderSection('content'); ?>
                 </div>
+
+                <?php
+                $aplikasi = getAplikasi();
+                if (!empty($aplikasi)) :
+                ?>
+                    <div class="container mt-5 pt-5 pb-3">
+                        <h6 class="text-purple text-bold display-5 text-lg text-center mb-2">Aplikasi Terkait</h6>
+                        <div class="row justify-content-center">
+                            <?php foreach ($aplikasi as $apl) : ?>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <a href="<?= $apl['link'] ?>" class="text-decoration-none" target="_blank">
+                                        <div class="card shadow" style="height: 100px;">
+                                            <div class="card-body p-0 overflow-hidden rounded-top text-center" style="background-image: url('/uploads/aplikasi/<?= $apl['gambar']; ?>'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                                <!-- <img src="/uploads/aplikasi/<?= $apl['gambar']; ?>" alt="" class=""> -->
+                                            </div>
+                                            <div class="card-footer text-center text-decoration-none text-secondary p-1 text-truncate">
+                                                <?= $apl['nama_aplikasi'] ?>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -87,7 +115,7 @@
                 V 1.0.0
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2022 <a href="https://diskumperindag.gorontaloprov.go.id/">Perindag Provinsi Gorontalo</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2022 <a class="text-purple" href="https://diskumperindag.gorontaloprov.go.id/">Perindag Provinsi Gorontalo</a>.</strong> All rights reserved.
         </footer>
     </div>
 

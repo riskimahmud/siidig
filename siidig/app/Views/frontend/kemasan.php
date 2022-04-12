@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="col-md-7">
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-purple">
             <div class="card-body">
                 <h6 class="text-center">Perusahaan Yang Sudah Mendapat Fasilitasi Kemasan</h6>
                 <div class="table-responsive">
