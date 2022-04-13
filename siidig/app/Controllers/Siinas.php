@@ -33,6 +33,7 @@ class Siinas extends BaseController
 
     public function store()
     {
+        // dd($this->request->getPost());
         if (!$this->validate('siinas')) {
             return redirect()->to('siinas/tambah')->withInput();
         }

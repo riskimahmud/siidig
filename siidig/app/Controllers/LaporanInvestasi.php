@@ -78,16 +78,48 @@ class LaporanInvestasi extends BaseController
 
         $cetak = $this->request->getGet('cetak');
         if ($cetak != "") {
-            $data_investasi = $this->investasi->where($where)->like($like)->findAll();
+            $data_investasi = $this->investasi->where($where)->like($like)->join('kabkota', 'kabkota.id = investasi.kabkota_id')->findAll();
             // dd($data_investasi);
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('uploads/template-cetak-investasi.xlsx');
             $worksheet = $spreadsheet->getActiveSheet();
 
-            $worksheet->getCell('A1')->setValue('Judul Laporan');
-            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-            $writer->save('write.xlsx');
+            $worksheet->getCell('A1')->setValue('Laporan Investasi');
 
-            return false;
+            if (!empty($data_investasi)) {
+                $no = 1;
+                $x = 5;
+                foreach ($data_investasi as $row) {
+                    $worksheet->setCellValue('A' . $x, $no++);
+                    $worksheet->setCellValue('B' . $x, $row['nama_ikm']);
+                    $worksheet->setCellValue('C' . $x, $row['nama_pemilik']);
+                    $worksheet->setCellValue('D' . $x, $row['alamat']);
+                    $worksheet->setCellValue('E' . $x, $row['keldesa']);
+                    $worksheet->setCellValue('F' . $x, $row['kecamatan']);
+                    $worksheet->setCellValue('G' . $x, $row['nama_kabkota']);
+                    $worksheet->setCellValue('H' . $x, $row['telp']);
+                    $worksheet->setCellValue('I' . $x, $row['bentuk_badan_usaha']);
+                    $worksheet->setCellValue('J' . $x, $row['tahun_izin']);
+                    $worksheet->setCellValue('K' . $x, $row['kode_kbli']);
+                    $worksheet->setCellValue('L' . $x, $row['kbli']);
+                    $worksheet->setCellValue('M' . $x, $row['komoditi']);
+                    $worksheet->setCellValue('N' . $x, $row['produk']);
+                    $worksheet->setCellValue('O' . $x, $row['tkl']);
+                    $worksheet->setCellValue('P' . $x, $row['tkp']);
+                    $worksheet->setCellValue('Q' . $x, $row['nilai_investasi']);
+                    $worksheet->setCellValue('R' . $x, $row['jumlah_produksi']);
+                    $worksheet->setCellValue('S' . $x, $row['satuan']);
+                    $worksheet->setCellValue('T' . $x, $row['nilai_produksi']);
+                    $worksheet->setCellValue('U' . $x, $row['nilai_bbbp']);
+                    $x++;
+                }
+            }
+
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('laporan.xlsx');
+
+            $name = "laporan.xlsx";
+            return $this->response->download("laporan.xlsx", null)->setFileName("Laporan Investasi.xlsx");
+            unlink($name);
         }
 
         $data['tahun'] = $tahun;
@@ -98,7 +130,7 @@ class LaporanInvestasi extends BaseController
         $data['industri'] = $this->industri->findAll();
         $data['kecamatan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
         $data['kelurahan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent <>' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
-        $data['badan_usaha'] = ['Koperasi', 'Perjan', 'Perum', 'Persero', 'CV', 'PO', 'PT'];
+        $data['badan_usaha'] = ['Koperasi', 'Perjan', 'Perum', 'Persero', 'CV', 'PO', 'PT', 'Kelompok'];
         return view('backend/' . $this->folder . '/index', $data);
     }
 
@@ -267,11 +299,11 @@ class LaporanInvestasi extends BaseController
                 continue;
             }
             $baris = [
-                'nama_ikm' => $worksheet->getCellByColumnAndRow(2, $row)->getValue(),
-                'nama' => $worksheet->getCellByColumnAndRow(3, $row)->getValue(),
+                'nama_ikm' => strtoupper($worksheet->getCellByColumnAndRow(2, $row)->getValue()),
+                'nama' => strtoupper($worksheet->getCellByColumnAndRow(3, $row)->getValue()),
                 'alamat' => $worksheet->getCellByColumnAndRow(4, $row)->getValue(),
-                'keldes' => $worksheet->getCellByColumnAndRow(5, $row)->getValue(),
-                'kecamatan' => $worksheet->getCellByColumnAndRow(6, $row)->getValue(),
+                'keldes' => strtoupper($worksheet->getCellByColumnAndRow(5, $row)->getValue()),
+                'kecamatan' => strtoupper($worksheet->getCellByColumnAndRow(6, $row)->getValue()),
                 'telp' => $worksheet->getCellByColumnAndRow(8, $row)->getValue(),
                 'bentuk_badan_usaha' => $worksheet->getCellByColumnAndRow(9, $row)->getValue(),
                 'tahun_izin' => $worksheet->getCellByColumnAndRow(10, $row)->getValue(),

@@ -4,16 +4,16 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-body p-2">
+            <div class="card-body pt-2 pb-0">
                 <?= form_open('', ['autocomplete' => 'off', 'method' => 'get']); ?>
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group">
-                            <label>Kabupaten / Kota</label>
-                            <select name="kabkota" id="kabkota" class="form-control">
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label text-left text-md-right">Kab / Kota</label>
+                            <select name="kabkota" id="kabkota" class="form-control form-control-sm col-sm-8">
                                 <option value="">Semua</option>
                                 <?php foreach ($kabkota as $kk) : ?>
-                                    <option value="<?= $kk['id'] ?>" <?= (($filter) && ($filter['kabkota'] == $kk['id'])) ? 'selected' : '' ?>>
+                                    <option value="<?= $kk['id'] ?>" <?= (isset($filter['kabkota']) && ($kk['id'] == $filter['kabkota'])) ? 'selected' : ''; ?>>
                                         <?= $kk['nama_kabkota'] ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -21,32 +21,65 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-sm-12">
-                        <div class="form-group">
-                            <label>Tahun</label>
-                            <select name="tahun" id="satuan" class="form-control" <?= (user("level") == "operator") ? 'disabled="disabled"' : ''; ?>>
-                                <option value="">Pilih Tahun</option>
-                                <?php for ($i = date("Y"); $i >= 2016; $i--) : ?>
-                                    <option value="<?= $i; ?>" <?= (($filter) && ($filter['tahun'] == $i)) ? 'selected' : '' ?>>
-                                        <?= $i ?>
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label for="industri" class="col-sm-4 col-form-label text-left text-md-right">
+                                Industri
+                            </label>
+                            <select name="industri" id="industri" class="form-control form-control-sm col-sm-8">
+                                <option value="">Semua</option>
+                                <?php foreach ($industri as $in) : ?>
+                                    <option value="<?= $in['id'] ?>" <?= (isset($filter['industri']) && ($in['id'] == $filter['industri'])) ? 'selected' : ''; ?>>
+                                        <?= $in['nama_industri'] ?>
                                     </option>
-                                <?php endfor; ?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1">
-                        <label for="">&nbsp;</label>
-                        <button type="submit" class="btn btn-primary d-block"><i class="fas fa-filter fa-fw"></i> Sortir</button>
+
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label for="tahun" class="col-sm-4 col-form-label text-left text-md-right">Tahun </label>
+                            <select name="tahun" id="tahun" class="form-control form-control-sm col-sm-8">
+                                <?php for ($i = date("Y"); $i >= 2016; $i--) : ?>
+                                    <option value="<?= $i ?>" <?= ($i == $filter['tahun']) ? 'selected' : ''; ?>><?= $i ?></option>
+                                <?php endfor ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label for="bentuk_badan_usaha" class="col-sm-6 col-form-label text-left text-md-right">Badan Usaha</label>
+                            <select name="bentuk_badan_usaha" id="bentuk_badan_usaha" class="form-control form-control-sm col-sm-6">
+                                <option value="">Semua</option>
+                                <?php foreach ($badan_usaha as $bu) : ?>
+                                    <option value="<?= $bu ?>" <?= (isset($filter['bentuk_badan_usaha']) && ($bu == $filter['bentuk_badan_usaha'])) ? 'selected' : ''; ?>>
+                                        <?= $bu ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label for="komoditi" class="col-sm-4 col-form-label text-left text-md-right">Komoditi</label>
+                            <input name="komoditi" id="komoditi" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['komoditi'])) ? $filter['komoditi'] : ''; ?>">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3 mb-0">
+                        <div class="form-group row">
+                            <label for="produk" class="col-sm-4 col-form-label text-left text-md-right">Produk</label>
+                            <input name="produk" id="produk" class="form-control form-control-sm col-sm-8" type="text" value="<?= (isset($filter['produk'])) ? $filter['produk'] : ''; ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="submit" name="cari" value="cari" class="btn btn-info btn-sm"><i class="fas fa-search fa-fw fa-sm"></i> Cari</button>
+                        <button type="submit" name="cetak" value="cetak" id="cetak" class="btn btn-success btn-sm"><i class="fas fa-print fa-fw fa-sm"></i> Cetak</button>
                     </div>
                     <?= form_close(); ?>
-                    <div class="col-md-1">
-                        <?= form_open('', ['autocomplete' => 'off', 'target' => '_blank']); ?>
-                        <input type="hidden" name="kabkota" id="kabkota_cetak">
-                        <input type="hidden" name="tahun" id="tahun_cetak">
-                        <label for="">&nbsp;</label>
-                        <button target="_blank" type="submit" name="cetak" value="cetak" class="btn btn-success d-block"><i class="fas fa-print fa-fw"></i> Cetak</button>
-                        <?= form_close(); ?>
-                    </div>
                 </div>
             </div>
         </div>

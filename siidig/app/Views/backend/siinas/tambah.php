@@ -29,12 +29,14 @@
                     </div>
                     <div class="form-group">
                         <label for="kode_kbli">Kode KBLI</label>
-                        <input type="text" class="form-control <?= ($validation->hasError('kode_kbli')) ? 'is-invalid' : '' ?>" name="kode_kbli" id="kode_kbli" value="<?= old('kode_kbli'); ?>" placeholder="Kode KBLI">
+                        <input type="text" class="form-control <?= ($validation->hasError('kode_kbli')) ? 'is-invalid' : '' ?>" data-role="tagsinput" name="kode_kbli" id="kode_kbli" value="<?= old('kode_kbli'); ?>" placeholder="Kode KBLI">
+                        <span class="text-muted text-xs">Tekan <code>,</code> untuk beberapa Kode KBLI</span>
                         <div class="invalid-feedback"><?= $validation->getError('kode_kbli') ?></div>
                     </div>
                     <div class="form-group">
                         <label for="bidang_usaha">Bidang Usaha</label>
                         <input type="text" class="form-control <?= ($validation->hasError('bidang_usaha')) ? 'is-invalid' : '' ?>" name="bidang_usaha" id="bidang_usaha" value="<?= old('bidang_usaha'); ?>" placeholder="Bidang Usaha">
+                        <span class="text-muted text-xs">Tekan <code>,</code> untuk beberapa Bidang Usaha</span>
                         <div class="invalid-feedback"><?= $validation->getError('bidang_usaha') ?></div>
                     </div>
                     <div class="form-group">
@@ -54,3 +56,17 @@
 </div>
 
 <?= $this->endSection(); ?>
+
+<?= $this->section('css') ?>
+<link rel="stylesheet" href="/plugins/bootstrap-tags-input/tagsinput.css">
+<?= $this->endSection() ?>
+
+<?= $this->section('script') ?>
+<script src="/plugins/bootstrap-tags-input/tagsinput.js"></script>
+<script>
+    $('#kode_kbli').tagsinput({
+        maxChars: 5
+    });
+    $('#bidang_usaha').tagsinput();
+</script>
+<?= $this->endSection() ?>

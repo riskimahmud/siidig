@@ -106,7 +106,7 @@ class Validation
         'nama_perusahaan' => ['label' => 'Nama Perusahaan', 'rules' => 'trim|required'],
         'alamat_kantor' => ['label' => 'Alamat Kantor', 'rules' => 'trim|required'],
         'alamat_pabrik' => ['label' => 'Alamat Pabrik', 'rules' => 'trim|required'],
-        'kode_kbli' => ['label' => 'Kode KBLI', 'rules' => 'trim|required|numeric|max_length[5]'],
+        'kode_kbli' => ['label' => 'Kode KBLI', 'rules' => 'trim|required|regex_match[/^[0-9]/]'],
         'bidang_usaha' => ['label' => 'Bidang Usaha', 'rules' => 'trim|required'],
         'tanggal_registrasi' => ['label' => 'Tanggal Registrasi', 'rules' => 'trim|required']
     ];
