@@ -170,15 +170,8 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label for="jumlah_produksi">Jumlah Kapasitas Produksi</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="jumlah_produksi" id="jumlah_produksi" class="form-control <?= ($validation->hasError('jumlah_produksi')) ? 'is-invalid' : ''; ?>" value="<?= set_value('jumlah_produksi') ?>" placeholder="Masukkan angka">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">
-                                                            .000
-                                                        </span>
-                                                    </div>
-                                                    <div class="invalid-feedback"><?= $validation->getError('jumlah_produksi'); ?></div>
-                                                </div>
+                                                <input type="text" name="jumlah_produksi" id="jumlah_produksi" class="form-control <?= ($validation->hasError('jumlah_produksi')) ? 'is-invalid' : ''; ?>" value="<?= set_value('jumlah_produksi') ?>" placeholder="Masukkan angka">
+                                                <div class="invalid-feedback"><?= $validation->getError('jumlah_produksi'); ?></div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
