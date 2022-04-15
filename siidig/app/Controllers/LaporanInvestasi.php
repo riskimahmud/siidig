@@ -141,7 +141,13 @@ class LaporanInvestasi extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Akses ditolak', 0);
         }
 
-        $investasi = $this->investasi->join('industri', 'industri.id = investasi.industri_id')->find($id);
+        $db = \Config\Database::connect();
+        $builder = $db->table('investasi');
+        $builder->select('industri.*, investasi.*');
+        $builder->where('investasi.id', $id);
+        $builder->join('industri', 'industri.id = investasi.industri_id');
+        $investasi = $builder->get()->getRowArray();
+        // $investasi = $this->investasi->join('industri', 'industri.id = investasi.industri_id')->find($id);
         if (empty($investasi)) {
             return redirect()->to("/investasi");
         }
