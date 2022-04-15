@@ -295,9 +295,14 @@ class LaporanInvestasi extends BaseController
         // echo $worksheet->getCellByColumnAndRow(2, 2)->getValue();
         $data_import = [];
         for ($row = 3; $row <= $highestRow; ++$row) {
-            if ($worksheet->getCellByColumnAndRow(17, $row)->getValue() >= "10000000") {
+            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() >= "10000000") {
                 continue;
             }
+
+            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() == "") {
+                break;
+            }
+
             $baris = [
                 'nama_ikm' => strtoupper($worksheet->getCellByColumnAndRow(2, $row)->getValue()),
                 'nama' => strtoupper($worksheet->getCellByColumnAndRow(3, $row)->getValue()),
@@ -313,11 +318,11 @@ class LaporanInvestasi extends BaseController
                 'produk' => $worksheet->getCellByColumnAndRow(14, $row)->getValue(),
                 'tkl' => $worksheet->getCellByColumnAndRow(15, $row)->getValue(),
                 'tkp' => $worksheet->getCellByColumnAndRow(16, $row)->getValue(),
-                'nilai_investasi' => $worksheet->getCellByColumnAndRow(17, $row)->getValue(),
-                'jumlah_produksi' => $worksheet->getCellByColumnAndRow(18, $row)->getValue(),
+                'nilai_investasi' => $worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue(),
+                'jumlah_produksi' => $worksheet->getCellByColumnAndRow(18, $row)->getFormattedValue(),
                 'satuan' => $worksheet->getCellByColumnAndRow(19, $row)->getValue(),
-                'nilai_produksi' => $worksheet->getCellByColumnAndRow(20, $row)->getValue(),
-                'nilai_bbbp' => $worksheet->getCellByColumnAndRow(21, $row)->getValue(),
+                'nilai_produksi' => $worksheet->getCellByColumnAndRow(20, $row)->getFormattedValue(),
+                'nilai_bbbp' => $worksheet->getCellByColumnAndRow(21, $row)->getFormattedValue(),
                 'kabkota_id' => user("kabkota_id"),
                 'user_id' => user("user_id"),
                 'tahun' => $this->request->getPost('tahun'),
@@ -325,6 +330,7 @@ class LaporanInvestasi extends BaseController
             ];
             array_push($data_import, $baris);
         }
+        // dd($data_import);
 
         $import = $this->investasi->insertBatch($data_import);
         if ($import) {
