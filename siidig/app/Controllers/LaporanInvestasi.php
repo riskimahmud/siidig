@@ -129,7 +129,11 @@ class LaporanInvestasi extends BaseController
         $data['base'] = $this->base;
         $data['industri'] = $this->industri->findAll();
         $data['kecamatan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
-        $data['kelurahan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent <>' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
+        if ($kecamatan != "") {
+            $data['kelurahan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent' => $kecamatan])->orderBy('nama_kelkec', 'ASC')->findAll();
+        } else {
+            $data['kelurahan'] = $this->kelkec->where(['kabkota_id' => user('kabkota_id'), 'parent <>' => ''])->orderBy('nama_kelkec', 'ASC')->findAll();
+        }
         $data['badan_usaha'] = ['Koperasi', 'Perjan', 'Perum', 'Persero', 'CV', 'PO', 'PT', 'Kelompok'];
         return view('backend/' . $this->folder . '/index', $data);
     }
@@ -305,11 +309,12 @@ class LaporanInvestasi extends BaseController
                 continue;
             }
 
-            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() == "") {
+            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() == "" && $worksheet->getCellByColumnAndRow(14, $row)->getValue() == "") {
                 break;
             }
 
             $baris = [
+                // 'no' => $worksheet->getCellByColumnAndRow(1, $row)->getValue(),
                 'nama_ikm' => strtoupper($worksheet->getCellByColumnAndRow(2, $row)->getValue()),
                 'nama' => strtoupper($worksheet->getCellByColumnAndRow(3, $row)->getValue()),
                 'alamat' => $worksheet->getCellByColumnAndRow(4, $row)->getValue(),
@@ -367,7 +372,11 @@ class LaporanInvestasi extends BaseController
     public function get_kelurahan()
     {
         $kec = $this->request->getPost('kec');
-        $kel = $this->kelkec->where(['parent' => $kec])->findAll();
+        if ($kec == "") {
+            $kel = $this->kelkec->where(['kabkota_id' => user("kabkota_id"), 'parent <>' => ''])->findAll();
+        } else {
+            $kel = $this->kelkec->where(['parent' => $kec])->findAll();
+        }
         $data = [
             'data' => $kel
         ];

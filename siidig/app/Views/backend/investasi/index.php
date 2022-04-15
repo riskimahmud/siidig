@@ -161,6 +161,29 @@
 
 <?= $this->section('script') ?>
 <script>
+    $(document).ready(function() {
+        const kecamatan = $("#kecamatan").val();
+        if (kecamatan != "") {
+            // alert(kecamatan);
+            // $("#kelurahan").html(`<option value="">Semua</option>`);
+            // $.ajax({
+            //     url: url + '/getKelurahan',
+            //     data: {
+            //         kec: kecamatan
+            //     },
+            //     type: 'POST',
+            //     dataType: 'JSON',
+            //     success: function(response) {
+            //         let option = `<option value="">Semua</option>`;
+            //         response.data.forEach(e => {
+            //             option += `<option value="${e.nama_kelkec}">${e.nama_kelkec}</option>`
+            //         });
+            //         $("#kelurahan").html(option);
+            //     }
+            // })
+        }
+    });
+
     $("#kecamatan").on("change", function(e) {
         const kec = $(this).val();
         $("#kelurahan").html(`<option value="">Semua</option>`);
