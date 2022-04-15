@@ -122,11 +122,11 @@
                                 <th>Nama Pemilik</th>
                                 <th>Nama IKM</th>
                                 <th>Produk</th>
-                                <th>Nilai Investasi</th>
+                                <th>Nilai Investasi (000)</th>
                                 <th>Jumlah Produksi</th>
                                 <th>Satuan</th>
-                                <th>Nilai Produksi</th>
-                                <th>Nilai BB/BP</th>
+                                <th>Nilai Produksi (000)</th>
+                                <th>Nilai BB/BP (000)</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

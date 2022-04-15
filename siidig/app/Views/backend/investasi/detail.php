@@ -86,7 +86,7 @@
                         <div class="col-md-6">
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nilai Investasi</label>
-                                <span><?= angkaInvestasi($data['nilai_investasi']) ?></span>
+                                <span><?= angkaInvestasi($data['nilai_investasi'] . '000') ?></span>
                             </div>
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Jumlah Produksi</label>
@@ -98,11 +98,11 @@
                             </div>
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nilai Produksi</label>
-                                <span><?= angkaInvestasi($data['nilai_produksi']) ?></span>
+                                <span><?= angkaInvestasi($data['nilai_produksi'] . '000') ?></span>
                             </div>
                             <div class="d-flex justify-content-between border-bottom mb-2">
                                 <label>Nilai BB/BP</label>
-                                <span><?= angkaInvestasi($data['nilai_bbbp']) ?></span>
+                                <span><?= angkaInvestasi($data['nilai_bbbp'] . '000') ?></span>
                             </div>
                         </div>
                     </div>
