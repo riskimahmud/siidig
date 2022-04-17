@@ -309,7 +309,7 @@ class LaporanInvestasi extends BaseController
                 continue;
             }
 
-            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() == "" && $worksheet->getCellByColumnAndRow(14, $row)->getValue() == "") {
+            if ($worksheet->getCellByColumnAndRow(17, $row)->getFormattedValue() == "" && $worksheet->getCellByColumnAndRow(14, $row)->getValue() == "" && $worksheet->getCellByColumnAndRow(3, $row)->getValue() == "" && $worksheet->getCellByColumnAndRow(13, $row)->getValue() == "") {
                 break;
             }
 
