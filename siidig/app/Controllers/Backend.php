@@ -51,6 +51,53 @@ class Backend extends BaseController
             $data['series1'] =   $series1;
             $data['series2'] =   $series2;
             $data['xaxis']  =   $tahun;
+
+            // mambuat daftar tabel
+            $tabel_unit_usaha = [];
+            $tabel_tk = [];
+            $tabel_tk_gender = [];
+            $tabel_investasi = [];
+            $tabel_produksi = [];
+
+            $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+            $tableName = getTableNameStatistik(user("kabkota_id"));
+            $kecamatan = $this->crud_model->select_custom("select DISTINCT(kecamatan) from investasi where kabkota_id = '" . user("kabkota_id") . "' order by kecamatan ASC");
+
+            foreach ($kecamatan as $kec) {
+                $tabel_unit_usaha[$kec->kecamatan] = [];
+                $tabel_tk[$kec->kecamatan] = [];
+                $tabel_tk_gender[$kec->kecamatan] = [];
+                $tabel_investasi[$kec->kecamatan] = [];
+                $tabel_produksi[$kec->kecamatan] = [];
+            }
+            // dd($kecamatan);
+            foreach ($tahun as $t) {
+                foreach ($kecamatan as $kec) {
+                    $row = $this->crud_model->select_data($tableName, 'getRow', ['tahun' => $t->tahun, 'kecamatan' => $kec->kecamatan]);
+                    if (empty($row)) {
+                        $tabel_unit_usaha[$kec->kecamatan][] = 0;
+                        $tabel_tk[$kec->kecamatan][] = 0;
+                        $tabel_tk_gender[$kec->kecamatan][] = 0;
+                        $tabel_tk_gender[$kec->kecamatan][] = 0;
+                        $tabel_investasi[$kec->kecamatan][] = 0;
+                        $tabel_produksi[$kec->kecamatan][] = 0;
+                    } else {
+                        $tabel_unit_usaha[$kec->kecamatan][] = $row->unit_usaha;
+                        $tabel_tk[$kec->kecamatan][] = $row->jumlah_tk;
+                        $tabel_tk_gender[$kec->kecamatan][] = $row->tkl;
+                        $tabel_tk_gender[$kec->kecamatan][] = $row->tkp;
+                        $tabel_investasi[$kec->kecamatan][] = $row->investasi;
+                        $tabel_produksi[$kec->kecamatan][] = $row->nilai_produksi;
+                    }
+                }
+            }
+            // dd($tabel_investasi);
+            $data['tahun_tabel'] = $tahun;
+            $data['tabel_unit_usaha'] = $tabel_unit_usaha;
+            $data['tabel_tk'] = $tabel_tk;
+            $data['tabel_tk_gender'] = $tabel_tk_gender;
+            $data['tabel_investasi'] = $tabel_investasi;
+            $data['tabel_produksi'] = $tabel_produksi;
         } else {
             $data['statistik_all']  =   $this->crud_model->select_data('grafik_tahunan', 'getRow', null, null, ['tahun' => 'DESC']);
             $grafik_tahunan =   $this->crud_model->select_data('grafik_tahunan', 'getResult', null, null, ['tahun' => 'ASC']);

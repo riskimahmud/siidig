@@ -110,6 +110,313 @@
     <div class="col-md-5">
       <div class="p-4 rounded-lg bg-white shadow" id="container2"></div>
     </div>
+
+    <!-- tabel untuk user -->
+    <?php if (user("level") == "user") : ?>
+      <div class="col-md-12 mt-3">
+        <!-- Nilai Investasi Start-->
+        <div class="card card-outline card-purple mb-4 shadow">
+          <div class="card-header p-1">
+            <h6 class="text-center display-5 p-2 text-bold">Rekap Nilai Investasi</h6>
+          </div>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-sm table-bordered table-striped text-center align-items-center">
+              <thead>
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Kecamatan</th>
+                  <th colspan="<?= count($tahun_tabel) ?>">Nilai Investasi</th>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th><?= $tt->tahun; ?></th>
+                  <?php endforeach; ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no_ti = 1;
+                $col_ti = [];
+                foreach ($tabel_investasi as $kabkota => $ti) : ?>
+                  <?php //d($kabkota); 
+                  ?>
+                  <tr>
+                    <td><?= $no_ti; ?></td>
+                    <td class="text-left"><?= $kabkota; ?></td>
+                    <?php
+                    // $column = 0;
+                    foreach ($ti as $ti) {
+                      // $col_ti[$column] = $ti;
+                    ?>
+                      <td><?= angkaInvestasi($ti, false); ?></td>
+                    <?php
+                      // $column++;
+                    }
+                    ?>
+                  </tr>
+                <?php $no_ti++;
+                endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">Jumlah</th>
+                  <?php foreach ($tahun_tabel as $ind => $tt) : ?>
+                    <th>
+                      <?php echo angkaInvestasi(array_sum(array_column($tabel_investasi, $ind)), false); ?>
+                    </th>
+                  <?php endforeach; ?>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- Nilai Investasi End -->
+
+        <!-- Nilai Produksi Start -->
+        <div class="card card-outline card-purple mb-4 shadow">
+          <div class="card-header p-1">
+            <h6 class="text-center display-5 p-2 text-bold">Rekap Nilai Produksi</h6>
+          </div>
+          <div class="card-body table-responsive p-0">
+
+            <table class="table table-sm table-bordered table-striped text-center">
+              <thead>
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Kecamatan</th>
+                  <th colspan="<?= count($tahun_tabel) ?>">Nilai Produksi</th>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th><?= $tt->tahun; ?></th>
+                  <?php endforeach; ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no_ti = 1;
+                $col_ti = [];
+                foreach ($tabel_produksi as $kabkota => $ti) : ?>
+                  <?php //d($kabkota); 
+                  ?>
+                  <tr>
+                    <td><?= $no_ti; ?></td>
+                    <td class="text-left"><?= $kabkota; ?></td>
+                    <?php
+                    // $column = 0;
+                    foreach ($ti as $ti) {
+                      // $col_ti[$column] = $ti;
+                    ?>
+                      <td><?= angkaInvestasi($ti, false); ?></td>
+                    <?php
+                      // $column++;
+                    }
+                    ?>
+                  </tr>
+                <?php $no_ti++;
+                endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">Jumlah</th>
+                  <?php foreach ($tahun_tabel as $ind => $tt) : ?>
+                    <th>
+                      <?php echo angkaInvestasi(array_sum(array_column($tabel_produksi, $ind)), false); ?>
+                    </th>
+                  <?php endforeach; ?>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- Nilai Produksi End -->
+
+        <!-- Unit Usaha Start -->
+        <div class="card card-outline card-purple mb-4 shadow">
+          <div class="card-header p-1">
+            <h6 class="text-center display-5 p-2 text-bold mb-2">Rekap Unit Usaha</h6>
+          </div>
+          <div class="card-body table-responsive p-0">
+
+            <table class="table table-sm table-bordered table-striped table-condensed text-center">
+              <thead>
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Kecamatan</th>
+                  <th colspan="<?= count($tahun_tabel) ?>">Unit Usaha</th>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th><?= $tt->tahun; ?></th>
+                  <?php endforeach; ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no_ti = 1;
+                $col_ti = [];
+                foreach ($tabel_unit_usaha as $kabkota => $ti) : ?>
+                  <?php //d($kabkota); 
+                  ?>
+                  <tr>
+                    <td><?= $no_ti; ?></td>
+                    <td class="text-left"><?= $kabkota; ?></td>
+                    <?php
+                    // $column = 0;
+                    foreach ($ti as $ti) {
+                      // $col_ti[$column] = $ti;
+                    ?>
+                      <td><?= angkaInvestasi($ti, false); ?></td>
+                    <?php
+                      // $column++;
+                    }
+                    ?>
+                  </tr>
+                <?php $no_ti++;
+                endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">Jumlah</th>
+                  <?php foreach ($tahun_tabel as $ind => $tt) : ?>
+                    <th>
+                      <?php echo angkaInvestasi(array_sum(array_column($tabel_unit_usaha, $ind)), false); ?>
+                    </th>
+                  <?php endforeach; ?>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- Unit Usaha End -->
+
+        <!-- Tenaga Kerja Start -->
+        <div class="card card-outline card-purple mb-4 shadow">
+          <div class="card-header p-1">
+            <h6 class="text-center display-5 p-2 text-bold mb-2">Rekap Tenaga Kerja</h6>
+          </div>
+          <div class="card-body table-responsive p-0">
+
+            <table class="table table-sm table-bordered table-striped table-condensed text-center">
+              <thead>
+                <tr>
+                  <th rowspan="2">No.</th>
+                  <th rowspan="2">Kecamatan</th>
+                  <th colspan="<?= count($tahun_tabel) ?>">Tenaga Kerja</th>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th><?= $tt->tahun; ?></th>
+                  <?php endforeach; ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no_ti = 1;
+                $col_ti = [];
+                foreach ($tabel_tk as $kabkota => $ti) : ?>
+                  <?php //d($kabkota); 
+                  ?>
+                  <tr>
+                    <td><?= $no_ti; ?></td>
+                    <td class="text-left"><?= $kabkota; ?></td>
+                    <?php
+                    // $column = 0;
+                    foreach ($ti as $ti) {
+                      // $col_ti[$column] = $ti;
+                    ?>
+                      <td><?= angkaInvestasi($ti, false); ?></td>
+                    <?php
+                      // $column++;
+                    }
+                    ?>
+                  </tr>
+                <?php $no_ti++;
+                endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">Jumlah</th>
+                  <?php foreach ($tahun_tabel as $ind => $tt) : ?>
+                    <th>
+                      <?php echo angkaInvestasi(array_sum(array_column($tabel_tk, $ind)), false); ?>
+                    </th>
+                  <?php endforeach; ?>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- Tenaga Kerja End -->
+
+        <!-- Tenaga Kerja Gender Start -->
+        <div class="card card-outline card-purple mb-4 shadow">
+          <div class="card-header p-1">
+            <h6 class="text-center display-5 p-2 text-bold mb-2">Rekap Tenaga Kerja (Gender)</h6>
+          </div>
+          <div class="card-body table-responsive p-0">
+
+            <table class="table table-sm table-bordered table-striped table-condensed text-center">
+              <thead>
+                <tr>
+                  <th rowspan="3">No.</th>
+                  <th rowspan="3">Kecamatan</th>
+                  <th colspan="<?= count($tahun_tabel) * 2 ?>">Tenaga Kerja</th>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th colspan="2"><?= $tt->tahun; ?></th>
+                  <?php endforeach; ?>
+                </tr>
+                <tr>
+                  <?php foreach ($tahun_tabel as $tt) : ?>
+                    <th>L</th>
+                    <th>P</th>
+                  <?php endforeach; ?>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no_ti = 1;
+                $col_ti = [];
+                foreach ($tabel_tk_gender as $kabkota => $ti) : ?>
+                  <?php //d($kabkota); 
+                  ?>
+                  <tr>
+                    <td><?= $no_ti; ?></td>
+                    <td class="text-left"><?= $kabkota; ?></td>
+                    <?php
+                    // $column = 0;
+                    foreach ($ti as $ti) {
+                      // $col_ti[$column] = $ti;
+                    ?>
+                      <td><?= angkaInvestasi($ti, false); ?></td>
+                    <?php
+                      // $column++;
+                    }
+                    ?>
+                  </tr>
+                <?php $no_ti++;
+                endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">Jumlah</th>
+                  <?php for ($i = 0; $i < count($tahun_tabel) * 2; $i++) {
+                    # code...
+                  ?>
+                    <th>
+                      <?php echo angkaInvestasi(array_sum(array_column($tabel_tk_gender, $i)), false); ?>
+                    </th>
+                  <?php } ?>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- Tenaga Kerja Gender End -->
+      </div>
+    <?php endif; ?>
   </div>
 </div>
 <?= $this->endSection(); ?>
