@@ -67,7 +67,21 @@ class Admin extends BaseController
             $data_investasi = $this->investasi->where($where)->like($like)->join('kabkota', 'kabkota.id = investasi.kabkota_id')->findAll();
             // dd($data_investasi);
             $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('uploads/template-cetak-investasi.xlsx');
+
+            $styleArray = [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                        // 'color' => ['#000'],
+                    ],
+                ],
+            ];
+
             $worksheet = $spreadsheet->getActiveSheet();
+
+            $worksheet->getStyle('A1:U1')->applyFromArray($styleArray);
+            $worksheet->getColumnDimension('B')->setAutoSize(true);
+            $worksheet->getColumnDimension('C')->setAutoSize(true);
 
             $worksheet->getCell('A1')->setValue('Laporan Investasi');
 
@@ -98,6 +112,7 @@ class Admin extends BaseController
                     $worksheet->setCellValue('U' . $x, $row['nilai_bbbp']);
                     $x++;
                 }
+                $worksheet->getStyle('A5' . ':' . 'U' . ($x - 1))->applyFromArray($styleArray);
             }
 
             $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
