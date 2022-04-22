@@ -48,6 +48,11 @@ $routes->get('/logout', 'Login::logout');
 
 $routes->get('/beranda', 'Backend::index');
 $routes->get('/testing', 'Backend::coba');
+
+// cetak PDF
+$routes->get('/cetak-pdf/(:any)', 'Frontend::cetak_pdf/$1');
+
+
 // $routes->get('/testing', 'Backend::testing');
 // $routes->get('/laporan', 'Laporan::index');
 // $routes->add('/cari_laporan', 'Laporan::cari');

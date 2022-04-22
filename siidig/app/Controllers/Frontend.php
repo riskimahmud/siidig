@@ -522,4 +522,62 @@ class Frontend extends BaseController
         ];
         return view('frontend/siinas', $data);
     }
+
+    // cetak rekapan PDF
+    public function cetak_pdf($id)
+    {
+        $daftar = ['investasi', 'produksi', 'unit_usaha', 'tenaga_kerja', 'tenaga_kerja_gender'];
+        if (in_array($id, $daftar)) {
+            if ($id == "tenaga_kerja_gender") {
+                $title = "REKAPAN Tenaga Kerja (Jenis Kelamin)";
+            } else {
+                $title = "ReKAPAN " . str_replace("_", " ", $id);
+            }
+            $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
+            $kabupaten_kota = $this->kabkota->findAll();
+
+            foreach ($tahun as $t) {
+                foreach ($kabupaten_kota as $kk) {
+                    // echo $t->tahun . " - " . $kk['nama_kabkota'] . "<br>";
+                    $data = $this->crud_model->select_data('grafik_kabkota_tahunan', 'getRow', ['tahun' => $t->tahun, 'id' => $kk['id']]);
+                    if (empty($data)) {
+                        $tabel_unit_usaha[$kk['nama_kabkota']][] = 0;
+                        $tabel_tk[$kk['nama_kabkota']][] = 0;
+                        $tabel_tk_gender[$kk['nama_kabkota']][] = 0;
+                        $tabel_tk_gender[$kk['nama_kabkota']][] = 0;
+                        $tabel_investasi[$kk['nama_kabkota']][] = 0;
+                        $tabel_produksi[$kk['nama_kabkota']][] = 0;
+                    } else {
+                        $tabel_unit_usaha[$kk['nama_kabkota']][] = $data->unit_usaha;
+                        $tabel_tk[$kk['nama_kabkota']][] = $data->tenaga_kerja;
+                        $tabel_tk_gender[$kk['nama_kabkota']][] = $data->tenaga_kerja_laki;
+                        $tabel_tk_gender[$kk['nama_kabkota']][] = $data->tenaga_kerja_perempuan;
+                        $tabel_investasi[$kk['nama_kabkota']][] = $data->nilai_investasi;
+                        $tabel_produksi[$kk['nama_kabkota']][] = $data->nilai_produksi;
+                    }
+                }
+            }
+
+            $data = [
+                'tahun_tabel' => $tahun,
+                'tabel_unit_usaha' => $tabel_unit_usaha,
+                'tabel_tk' => $tabel_tk,
+                'tabel_tk_gender' => $tabel_tk_gender,
+                'tabel_investasi' => $tabel_investasi,
+                'tabel_produksi' => $tabel_produksi,
+                'id' => $id,
+                'title' => $title
+            ];
+            // return view('frontend/home', $data);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml(view('cetak_pdf', $data));
+            $dompdf->setPaper('A4', 'landscape');
+            $dompdf->render();
+            return $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+            // $dompdf->stream();
+        } else {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Akses ditolak', 0);
+        }
+    }
 }

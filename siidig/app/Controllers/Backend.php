@@ -130,7 +130,7 @@ class Backend extends BaseController
 
     public function coba()
     {
-        return view('frontend/testing');
+        // return view('frontend/testing');
         // echo phpinfo();
     }
 
