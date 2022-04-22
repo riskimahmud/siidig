@@ -574,8 +574,8 @@ class Frontend extends BaseController
             $dompdf->loadHtml(view('cetak_pdf', $data));
             $dompdf->setPaper('A4', 'landscape');
             $dompdf->render();
-            return $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
-            // $dompdf->stream();
+            // return $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+            $dompdf->stream();
         } else {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Akses ditolak', 0);
         }
