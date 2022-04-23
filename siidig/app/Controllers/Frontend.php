@@ -143,6 +143,7 @@ class Frontend extends BaseController
         $kimia = ['name' => 'KIMIA & BAHAN BANGUNAN'];
         $kerajinan = ['name' => 'KERAJINAN'];
         $logam = ['name' => 'INDUSTRI LOGAM & ELEKTRONIK'];
+        $furniture = ['name' => 'FURNITURE'];
         $xaxis_industri = [];
 
         $tahun = $this->crud_model->select_custom("select distinct(tahun) from grafik_industri_tahunan order by tahun ASC");
@@ -183,8 +184,15 @@ class Frontend extends BaseController
                 $q_logam = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '5', 'tahun' => $t->tahun]);
             }
             (empty($q_logam)) ? $logam['data'][] = 0 : $logam['data'][] = $q_logam->nilai_investasi;
+
+            if ($kabkota != "") {
+                $q_furniture = $this->crud_model->select_data('grafik_all', 'getRow', array_merge($where, ['industri_id' => '6', 'tahun' => $t->tahun]));
+            } else {
+                $q_furniture = $this->crud_model->select_data('grafik_industri_tahunan', 'getRow', ['industri_id' => '6', 'tahun' => $t->tahun]);
+            }
+            (empty($q_furniture)) ? $furniture['data'][] = 0 : $furniture['data'][] = $q_furniture->nilai_investasi;
         }
-        $series_industri = [$sandang, $pangan, $kimia, $kerajinan, $logam];
+        $series_industri = [$sandang, $pangan, $kimia, $kerajinan, $logam, $furniture];
 
         // untuk tabel
         $kabupaten_kota = $this->kabkota->findAll();
