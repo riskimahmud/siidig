@@ -1,6 +1,7 @@
 <?php
 
 use Config\App;
+use Prophecy\Promise\ReturnPromise;
 
 function user($index)
 {
@@ -177,4 +178,22 @@ function getAplikasi()
     $db = \Config\Database::connect();
     $builder = $db->table('aplikasi')->get()->getResultArray();
     return $builder;
+}
+
+function getTableNameStatistik($id)
+{
+    if ($id == "1") {
+        $tableName = 'statistik_kecamatan_kotagor';
+    } elseif ($id == "2") {
+        $tableName = 'statistik_kecamatan_kabgor';
+    } elseif ($id == "3") {
+        $tableName = 'statistik_kecamatan_bonebol';
+    } elseif ($id == "4") {
+        $tableName = 'statistik_kecamatan_boalemo';
+    } elseif ($id == "5") {
+        $tableName = 'statistik_kecamatan_pohuwato';
+    } elseif ($id == "6") {
+        $tableName = 'statistik_kecamatan_gorut';
+    }
+    return $tableName;
 }
