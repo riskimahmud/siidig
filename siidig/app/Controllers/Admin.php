@@ -138,4 +138,44 @@ class Admin extends BaseController
     {
         dd($this->request->getVar());
     }
+
+    public function hapus_laporan_investasi()
+    {
+        $data['title'] = "Hapus Investasi";
+
+        // $where = [];
+        $tahun = $this->request->getVar('tahun') ? $this->request->getVar('tahun') : date("Y");
+        $filter = ['tahun' => $tahun];
+        $where = ['tahun' => $tahun];
+        $pesan = '';
+        $like = [];
+
+        $kabkota = $this->request->getVar('kabkota');
+        if ($kabkota != "") {
+            $filter['kabkota'] = $kabkota;
+            $where['kabkota_id'] = $kabkota;
+        }
+
+        $industri = $this->request->getGet('industri');
+        if ($industri != "") {
+            $where['industri_id'] = $industri;
+            $filter['industri'] = $industri;
+        }
+
+        $hapus = $this->request->getGet('hapus');
+        if ($hapus != "") {
+            $this->investasi->where($where)->delete();
+            $pesan = "Data berhasil dihapus";
+            // dd($this->request->getGet());
+        }
+
+        $data['pesan'] = $pesan;
+        $data['tahun'] = $tahun;
+        $data['kabkota'] = $this->kabkota->findAll();
+        $data['industri'] = $this->industri->findAll();
+        $data['data'] = $this->investasi->where($where)->like($like)->findAll();
+        $data['filter'] = $filter;
+        // dd($data);
+        return view('backend/laporan/hapus', $data);
+    }
 }

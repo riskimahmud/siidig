@@ -128,6 +128,8 @@ $routes->group('/', ['filter' => 'admin'], function ($routes) { // untuk admin
     $routes->get('laporan', 'Admin::laporan_investasi');
     $routes->get('laporan/(:num)', 'Admin::laporan_investasi_detail/$1');
     $routes->post('laporan', 'Admin::cetak_investasi');
+
+    $routes->get('hapus-laporan', 'Admin::hapus_laporan_investasi');
 });
 $routes->group('/', ['filter' => 'user'], function ($routes) { // untuk user
     // kelurahan kecamatan
